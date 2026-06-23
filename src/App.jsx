@@ -227,7 +227,7 @@ function MobileMenu({ active, setActive, onClose }) {
               <Zap size={14} color="#fff" />
             </div>
             <div>
-              <div style={{ fontWeight:800, fontSize:14, color:"#fff", letterSpacing:"-0.02em" }}>DI/UX</div>
+              <div style={{ fontWeight:800, fontSize:14, color:"#fff", letterSpacing:"-0.02em" }}>Personal Beacon</div>
               <div style={{ fontSize:9, color:"rgba(255,255,255,0.6)", textTransform:"uppercase", letterSpacing:"0.08em" }}>Decision Intelligence</div>
             </div>
           </div>
@@ -297,7 +297,7 @@ function Sidebar({ active, setActive, collapsed, onToggle }) {
           </div>
           {!collapsed && (
             <div>
-              <div style={{ fontWeight:800, fontSize:14, color:"#fff", letterSpacing:"-0.03em", whiteSpace:"nowrap" }}>DI/UX</div>
+              <div style={{ fontWeight:800, fontSize:14, color:"#fff", letterSpacing:"-0.03em", whiteSpace:"nowrap" }}>Personal Beacon</div>
               <div style={{ fontSize:8, color:"rgba(255,255,255,0.6)", textTransform:"uppercase", letterSpacing:"0.08em", marginTop:1, whiteSpace:"nowrap" }}>
                 Decision Intelligence
               </div>
@@ -1848,7 +1848,7 @@ function LoginPage({ onLogin }) {
             <Zap size={17} color="#fff" />
           </div>
           <div>
-            <div style={{ fontWeight:800, fontSize:17, color:"#fff", letterSpacing:"-0.03em", lineHeight:1 }}>DI/UX</div>
+            <div style={{ fontWeight:800, fontSize:17, color:"#fff", letterSpacing:"-0.03em", lineHeight:1 }}>Personal Beacon</div>
             <div style={{ fontSize:9, color:"rgba(255,255,255,0.6)", textTransform:"uppercase", letterSpacing:"0.1em", marginTop:2 }}>Decision Intelligence</div>
           </div>
         </div>
@@ -1885,7 +1885,7 @@ function LoginPage({ onLogin }) {
               <Zap size={15} color="#fff" />
             </div>
             <div>
-              <div style={{ fontWeight:800, fontSize:15, color:"#0F172A", letterSpacing:"-0.02em" }}>DI/UX</div>
+              <div style={{ fontWeight:800, fontSize:15, color:"#0F172A", letterSpacing:"-0.02em" }}>Personal Beacon</div>
               <div style={{ fontSize:9, color:"#94A3B8", textTransform:"uppercase", letterSpacing:"0.08em" }}>Decision Intelligence</div>
             </div>
           </div>

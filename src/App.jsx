@@ -630,13 +630,16 @@ function CoverageBar({ pillars, generated, processingTime }) {
       </div>
     </div>
     {/* Confidence legend */}
-    <div style={{ display:"flex", gap:14, alignItems:"center", paddingLeft:2 }}>
-      {[["alto","Alta","#16A34A"],["medio","Media","#CA8A04"],["bajo","Baja","#DC2626"]].map(([level, label, color]) => (
-        <div key={level} style={{ display:"flex", alignItems:"center", gap:5 }}>
-          <span style={{ width:7, height:7, borderRadius:"50%", backgroundColor:color, display:"inline-block", flexShrink:0 }} />
-          <span style={{ fontSize:11, color:"var(--text-muted)", fontWeight:500 }}>{label}</span>
-        </div>
-      ))}
+    <div style={{ paddingLeft:2 }}>
+      <div style={{ fontSize:10, fontWeight:700, textTransform:"uppercase", letterSpacing:"0.06em", color:"var(--text-muted)", marginBottom:5 }}>Referencias de validación</div>
+      <div style={{ display:"flex", gap:14, alignItems:"center" }}>
+        {[["alto","Alta","#16A34A"],["medio","Media","#CA8A04"],["bajo","Baja","#DC2626"]].map(([level, label, color]) => (
+          <div key={level} style={{ display:"flex", alignItems:"center", gap:5 }}>
+            <span style={{ width:7, height:7, borderRadius:"50%", backgroundColor:color, display:"inline-block", flexShrink:0 }} />
+            <span style={{ fontSize:11, color:"var(--text-muted)", fontWeight:500 }}>{label}</span>
+          </div>
+        ))}
+      </div>
     </div>
     </div>
   );
@@ -882,57 +885,54 @@ function QuerySelector({ activeQueryId, setActiveQueryId, setNav, chatOpen, onTo
   return (
     <div style={{ marginBottom:20, position:"relative" }}>
       {/* Label row */}
-      <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", marginBottom:8 }}>
+      <div style={{ marginBottom:8 }}>
         <span style={{ fontSize:11, fontWeight:700, textTransform:"uppercase", letterSpacing:"0.06em", color:'var(--text-muted)' }}>
           Consulta activa
         </span>
-        <div style={{ display:"flex", gap:6, alignItems:"center" }}>
-          <button
-            onClick={onToggleChat}
-            style={{
-              fontSize:12, fontWeight:700, display:"flex", alignItems:"center", gap:5,
-              padding:"6px 14px", borderRadius:8, cursor:"pointer",
-              backgroundColor:"var(--primary)",
-              border:"none",
-              color:"#fff",
-              opacity: chatOpen ? 0.75 : 1
-            }}
-          >
-            <Zap size={12} color="#fff" />
-            {chatOpen ? "Cerrar agente" : "Agente IA"}
-          </button>
-
-        </div>
       </div>
 
-      {/* Selector trigger */}
-      <button
-        onClick={() => setOpen(o => !o)}
-        style={{
-          width:"100%", display:"flex", alignItems:"center", justifyContent:"space-between",
-          padding:"11px 16px", borderRadius:10,
-          border:`1.5px solid ${open ? "var(--primary)" : "var(--border)"}`,
-          backgroundColor:'var(--surface)', cursor:"pointer", textAlign:"left",
-          transition:"border-color 0.15s"
-        }}
-      >
-        <div style={{ display:"flex", alignItems:"center", gap:10, minWidth:0 }}>
-          <div style={{ minWidth:0 }}>
-            <div style={{ fontSize:13, fontWeight:600, color:'var(--text)', overflow:"hidden", textOverflow:"ellipsis", whiteSpace:"nowrap" }}>
-              {active.initiative}
-            </div>
-            <div style={{ fontSize:11, color:'var(--text-muted)', marginTop:1 }}>
-              {active.celula.replace("Célula ", "")} · {active.date}
+      {/* Selector trigger + Agente button */}
+      <div style={{ display:"flex", gap:8, alignItems:"stretch" }}>
+        <button
+          onClick={() => setOpen(o => !o)}
+          style={{
+            flex:1, display:"flex", alignItems:"center", justifyContent:"space-between",
+            padding:"11px 16px", borderRadius:10,
+            border:`1.5px solid ${open ? "var(--primary)" : "var(--border)"}`,
+            backgroundColor:'var(--surface)', cursor:"pointer", textAlign:"left",
+            transition:"border-color 0.15s", minWidth:0
+          }}
+        >
+          <div style={{ display:"flex", alignItems:"center", gap:10, minWidth:0 }}>
+            <div style={{ minWidth:0 }}>
+              <div style={{ fontSize:13, fontWeight:600, color:'var(--text)', overflow:"hidden", textOverflow:"ellipsis", whiteSpace:"nowrap" }}>
+                {active.initiative}
+              </div>
+              <div style={{ fontSize:11, color:'var(--text-muted)', marginTop:1 }}>
+                {active.celula.replace("Célula ", "")} · {active.date}
+              </div>
             </div>
           </div>
-        </div>
-        <div style={{ display:"flex", alignItems:"center", gap:10, flexShrink:0, marginLeft:12 }}>
-          <ConfDots list={active.confidence} />
-          <ChevronRight size={14} color="var(--text-muted)"
-            style={{ transform: open ? "rotate(270deg)" : "rotate(90deg)", transition:"transform 0.15s" }}
-          />
-        </div>
-      </button>
+          <div style={{ display:"flex", alignItems:"center", gap:10, flexShrink:0, marginLeft:12 }}>
+            <ConfDots list={active.confidence} />
+            <ChevronRight size={14} color="var(--text-muted)"
+              style={{ transform: open ? "rotate(270deg)" : "rotate(90deg)", transition:"transform 0.15s" }}
+            />
+          </div>
+        </button>
+        <button
+          onClick={onToggleChat}
+          style={{
+            fontSize:12, fontWeight:700, display:"flex", alignItems:"center", gap:5,
+            padding:"0 14px", borderRadius:10, cursor:"pointer",
+            backgroundColor:"var(--primary)", border:"none", color:"#fff",
+            opacity: chatOpen ? 0.75 : 1, flexShrink:0
+          }}
+        >
+          <Zap size={12} color="#fff" />
+          {chatOpen ? "Cerrar agente" : "Agente IA"}
+        </button>
+      </div>
 
       {/* Dropdown */}
       {open && (

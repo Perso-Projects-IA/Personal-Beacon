@@ -590,7 +590,7 @@ function PillarCard({ pillar, fullWidth }) {
 function InsightCard({ text }) {
   return (
     <div style={{
-      backgroundColor:'#E0F2FE', borderRadius:12, border:`1px solid #BAE6FD`,
+      backgroundColor:'#fff', borderRadius:12, border:`1.5px solid #0076C7`,
       padding:"18px 22px", marginBottom:20,
       display:"flex", gap:14, alignItems:"flex-start"
     }}>

@@ -327,7 +327,7 @@ function Sidebar({ active, setActive, collapsed, onToggle }) {
           title={collapsed ? "Expandir menú" : "Colapsar menú"}
           style={{
             width:24, height:24, borderRadius:6, flexShrink:0,
-            backgroundColor:"rgba(255,255,255,0.12)", border:"none",
+            backgroundColor:"transparent", border:"none",
             cursor:"pointer", display:"flex", alignItems:"center", justifyContent:"center"
           }}
         >
@@ -982,13 +982,14 @@ function QuerySelector({ activeQueryId, setActiveQueryId, setNav, chatOpen, onTo
           onClick={onToggleChat}
           style={{
             fontSize:12, fontWeight:700, display:"flex", alignItems:"center", gap:5,
-            padding:"7px 14px", borderRadius:10, cursor:"pointer",
+            padding:"7px 14px", borderRadius:10, cursor: chatOpen ? "not-allowed" : "pointer",
             backgroundColor:"var(--primary)", border:"none", color:"#fff",
-            opacity: chatOpen ? 0.75 : 1, flexShrink:0, alignSelf:"center"
+            opacity: chatOpen ? 0.45 : 1, flexShrink:0, alignSelf:"center"
           }}
+          disabled={chatOpen}
         >
           <Zap size={12} color="#fff" />
-          {chatOpen ? "Cerrar agente" : "Agente IA"}
+          Agente IA
         </button>
       </div>
     </div>

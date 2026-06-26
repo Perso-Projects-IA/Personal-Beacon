@@ -630,7 +630,7 @@ function CoverageBar({ pillars, generated, processingTime }) {
       </div>
     </div>
     {/* Confidence legend */}
-    <div style={{ paddingLeft:2 }}>
+    <div style={{ paddingLeft:2, marginTop:20 }}>
       <div style={{ fontSize:10, fontWeight:700, textTransform:"uppercase", letterSpacing:"0.06em", color:"var(--text-muted)", marginBottom:5 }}>Referencias de validación</div>
       <div style={{ display:"flex", gap:14, alignItems:"center" }}>
         {[["alto","Alta","#16A34A"],["medio","Media","#CA8A04"],["bajo","Baja","#DC2626"]].map(([level, label, color]) => (

@@ -608,7 +608,7 @@ function InsightCard({ text }) {
   );
 }
 
-function CoverageBar({ pillars, generated, processingTime }) {
+function CoverageBar({ pillars }) {
   return (
     <div style={{ marginBottom:20 }}>
     <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", flexWrap:"wrap", gap:8, marginBottom:8 }}>
@@ -623,22 +623,16 @@ function CoverageBar({ pillars, generated, processingTime }) {
           );
         })}
       </div>
-      <div style={{ display:"flex", alignItems:"center", gap:8, fontSize:11, color:'var(--text-muted)' }}>
-        <span>{generated}</span>
-        <span>·</span>
-        <span style={{ display:"flex", alignItems:"center", gap:3 }}><Zap size={10} color={'var(--text-muted)'} />{processingTime}</span>
-      </div>
-    </div>
-    {/* Confidence legend */}
-    <div style={{ paddingLeft:2, marginTop:20 }}>
-      <div style={{ fontSize:10, fontWeight:700, textTransform:"uppercase", letterSpacing:"0.06em", color:"var(--text-muted)", marginBottom:5 }}>Referencias de validación</div>
-      <div style={{ display:"flex", gap:14, alignItems:"center" }}>
-        {[["alto","Alta","#16A34A"],["medio","Media","#CA8A04"],["bajo","Baja","#DC2626"]].map(([level, label, color]) => (
-          <div key={level} style={{ display:"flex", alignItems:"center", gap:5 }}>
-            <span style={{ width:7, height:7, borderRadius:"50%", backgroundColor:color, display:"inline-block", flexShrink:0 }} />
-            <span style={{ fontSize:11, color:"var(--text-muted)", fontWeight:500 }}>{label}</span>
-          </div>
-        ))}
+      <div style={{ textAlign:"right" }}>
+        <div style={{ fontSize:10, fontWeight:700, textTransform:"uppercase", letterSpacing:"0.06em", color:"var(--text-muted)", marginBottom:5 }}>Referencias de validación</div>
+        <div style={{ display:"flex", gap:14, alignItems:"center" }}>
+          {[["alto","Alta","#16A34A"],["medio","Media","#CA8A04"],["bajo","Baja","#DC2626"]].map(([level, label, color]) => (
+            <div key={level} style={{ display:"flex", alignItems:"center", gap:5 }}>
+              <span style={{ width:7, height:7, borderRadius:"50%", backgroundColor:color, display:"inline-block", flexShrink:0 }} />
+              <span style={{ fontSize:11, color:"var(--text-muted)", fontWeight:500 }}>{label}</span>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
     </div>

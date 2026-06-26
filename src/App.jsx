@@ -924,9 +924,9 @@ function QuerySelector({ activeQueryId, setActiveQueryId, setNav, chatOpen, onTo
           onClick={onToggleChat}
           style={{
             fontSize:12, fontWeight:700, display:"flex", alignItems:"center", gap:5,
-            padding:"0 14px", borderRadius:10, cursor:"pointer",
+            padding:"7px 14px", borderRadius:10, cursor:"pointer",
             backgroundColor:"var(--primary)", border:"none", color:"#fff",
-            opacity: chatOpen ? 0.75 : 1, flexShrink:0
+            opacity: chatOpen ? 0.75 : 1, flexShrink:0, alignSelf:"center"
           }}
         >
           <Zap size={12} color="#fff" />

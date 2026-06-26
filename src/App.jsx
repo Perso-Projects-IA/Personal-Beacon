@@ -386,7 +386,7 @@ function UserChip({ darkMode, toggleDark }) {
         backgroundColor:"#0076C7",
         display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0
       }}>
-        <span style={{ fontSize:11, fontWeight:700, color:"#fff" }}>CL</span>
+        <User size={16} color="#fff" />
       </div>
       <button onClick={toggleDark} title={darkMode ? "Cambiar a modo claro" : "Cambiar a modo oscuro"} style={{
         width:32, height:32, borderRadius:8, border:`1px solid var(--border)`,
@@ -590,7 +590,7 @@ function PillarCard({ pillar, fullWidth }) {
 function InsightCard({ text }) {
   return (
     <div style={{
-      backgroundColor:'#fff', borderRadius:12, border:`1.5px solid #0076C7`,
+      backgroundColor:'var(--surface)', borderRadius:12, border:`1px solid var(--border)`,
       padding:"18px 22px", marginBottom:20,
       display:"flex", gap:14, alignItems:"flex-start"
     }}>

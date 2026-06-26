@@ -624,7 +624,7 @@ function CoverageBar({ pillars }) {
         })}
       </div>
       <div style={{ textAlign:"right" }}>
-        <div style={{ fontSize:10, fontWeight:700, textTransform:"uppercase", letterSpacing:"0.06em", color:"var(--text-muted)", marginBottom:5 }}>Referencias de validación</div>
+        <div style={{ fontSize:9, fontWeight:700, textTransform:"uppercase", letterSpacing:"0.06em", color:"var(--text-muted)", marginBottom:5 }}>Referencias de validación</div>
         <div style={{ display:"flex", gap:14, alignItems:"center" }}>
           {[["alto","Alta","#16A34A"],["medio","Media","#CA8A04"],["bajo","Baja","#DC2626"]].map(([level, label, color]) => (
             <div key={level} style={{ display:"flex", alignItems:"center", gap:5 }}>

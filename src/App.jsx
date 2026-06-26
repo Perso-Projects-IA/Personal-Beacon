@@ -877,7 +877,7 @@ function QuerySelector({ activeQueryId, setActiveQueryId, setNav, chatOpen, onTo
   const active = items.find(h => h.id === activeQueryId) || items[0];
 
   return (
-    <div style={{ marginBottom:20, position:"relative" }}>
+    <div style={{ marginBottom:20 }}>
       {/* Label row */}
       <div style={{ marginBottom:8 }}>
         <span style={{ fontSize:11, fontWeight:700, textTransform:"uppercase", letterSpacing:"0.06em", color:'var(--text-muted)' }}>
@@ -887,49 +887,37 @@ function QuerySelector({ activeQueryId, setActiveQueryId, setNav, chatOpen, onTo
 
       {/* Selector trigger + Agente button */}
       <div style={{ display:"flex", gap:8, alignItems:"stretch" }}>
-        <button
-          onClick={() => setOpen(o => !o)}
-          style={{
-            flex:1, display:"flex", alignItems:"center", justifyContent:"space-between",
-            padding:"11px 16px", borderRadius:10,
-            border:`1.5px solid ${open ? "var(--primary)" : "var(--border)"}`,
-            backgroundColor:'var(--surface)', cursor:"pointer", textAlign:"left",
-            transition:"border-color 0.15s", minWidth:0
-          }}
-        >
-          <div style={{ display:"flex", alignItems:"center", gap:10, minWidth:0 }}>
-            <div style={{ minWidth:0 }}>
-              <div style={{ fontSize:13, fontWeight:600, color:'var(--text)', overflow:"hidden", textOverflow:"ellipsis", whiteSpace:"nowrap" }}>
-                {active.initiative}
-              </div>
-              <div style={{ fontSize:11, color:'var(--text-muted)', marginTop:1 }}>
-                {active.celula.replace("Célula ", "")} · {active.date}
+        <div style={{ flex:1, position:"relative" }}>
+          <button
+            onClick={() => setOpen(o => !o)}
+            style={{
+              width:"100%", display:"flex", alignItems:"center", justifyContent:"space-between",
+              padding:"11px 16px", borderRadius:10,
+              border:`1.5px solid ${open ? "var(--primary)" : "var(--border)"}`,
+              backgroundColor:'var(--surface)', cursor:"pointer", textAlign:"left",
+              transition:"border-color 0.15s", minWidth:0
+            }}
+          >
+            <div style={{ display:"flex", alignItems:"center", gap:10, minWidth:0 }}>
+              <div style={{ minWidth:0 }}>
+                <div style={{ fontSize:13, fontWeight:600, color:'var(--text)', overflow:"hidden", textOverflow:"ellipsis", whiteSpace:"nowrap" }}>
+                  {active.initiative}
+                </div>
+                <div style={{ fontSize:11, color:'var(--text-muted)', marginTop:1 }}>
+                  {active.celula.replace("Célula ", "")} · {active.date}
+                </div>
               </div>
             </div>
-          </div>
-          <div style={{ display:"flex", alignItems:"center", gap:10, flexShrink:0, marginLeft:12 }}>
-            <ConfDots list={active.confidence} />
-            <ChevronRight size={14} color="var(--text-muted)"
-              style={{ transform: open ? "rotate(270deg)" : "rotate(90deg)", transition:"transform 0.15s" }}
-            />
-          </div>
-        </button>
-        <button
-          onClick={onToggleChat}
-          style={{
-            fontSize:12, fontWeight:700, display:"flex", alignItems:"center", gap:5,
-            padding:"7px 14px", borderRadius:10, cursor:"pointer",
-            backgroundColor:"var(--primary)", border:"none", color:"#fff",
-            opacity: chatOpen ? 0.75 : 1, flexShrink:0, alignSelf:"center"
-          }}
-        >
-          <Zap size={12} color="#fff" />
-          {chatOpen ? "Cerrar agente" : "Agente IA"}
-        </button>
-      </div>
+            <div style={{ display:"flex", alignItems:"center", gap:10, flexShrink:0, marginLeft:12 }}>
+              <ConfDots list={active.confidence} />
+              <ChevronRight size={14} color="var(--text-muted)"
+                style={{ transform: open ? "rotate(270deg)" : "rotate(90deg)", transition:"transform 0.15s" }}
+              />
+            </div>
+          </button>
 
-      {/* Dropdown */}
-      {open && (
+          {/* Dropdown */}
+          {open && (
         <div className="di-dropdown-backdrop" onClick={() => setOpen(false)}>
         <div className="di-dropdown-menu" style={{
           backgroundColor:'var(--surface)', border:`1px solid var(--border)`,
@@ -988,7 +976,21 @@ function QuerySelector({ activeQueryId, setActiveQueryId, setNav, chatOpen, onTo
           </div>
         </div>
         </div>
-      )}
+          )}
+        </div>
+        <button
+          onClick={onToggleChat}
+          style={{
+            fontSize:12, fontWeight:700, display:"flex", alignItems:"center", gap:5,
+            padding:"7px 14px", borderRadius:10, cursor:"pointer",
+            backgroundColor:"var(--primary)", border:"none", color:"#fff",
+            opacity: chatOpen ? 0.75 : 1, flexShrink:0, alignSelf:"center"
+          }}
+        >
+          <Zap size={12} color="#fff" />
+          {chatOpen ? "Cerrar agente" : "Agente IA"}
+        </button>
+      </div>
     </div>
   );
 }

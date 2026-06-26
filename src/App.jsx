@@ -224,7 +224,16 @@ function MobileMenu({ active, setActive, onClose }) {
         }}>
           <div style={{ display:"flex", alignItems:"center", gap:10 }}>
             <div style={{ width:30, height:30, borderRadius:8, backgroundColor:"rgba(255,255,255,0.2)", display:"flex", alignItems:"center", justifyContent:"center" }}>
-              <Zap size={14} color="#fff" />
+              <svg width="16" height="16" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="45,82 55,82 53,40 47,40" fill="#fff"/>
+                <rect x="41" y="28" width="18" height="14" rx="2" fill="#fff"/>
+                <polygon points="50,11 38,28 62,28" fill="#fff"/>
+                <circle cx="50" cy="35" r="5" fill="#FBBF24"/>
+                <rect x="33" y="82" width="34" height="7" rx="3" fill="#fff"/>
+                <line x1="60" y1="29" x2="82" y2="13" stroke="#fff" strokeWidth="3" strokeLinecap="round"/>
+                <line x1="61" y1="33" x2="87" y2="33" stroke="#fff" strokeWidth="3" strokeLinecap="round"/>
+                <line x1="60" y1="37" x2="82" y2="53" stroke="#fff" strokeWidth="3" strokeLinecap="round"/>
+              </svg>
             </div>
             <div>
               <div style={{ fontWeight:800, fontSize:14, color:"#fff", letterSpacing:"-0.02em" }}>Personal Beacon</div>
@@ -293,7 +302,16 @@ function Sidebar({ active, setActive, collapsed, onToggle }) {
             backgroundColor:"rgba(255,255,255,0.2)",
             display:"flex", alignItems:"center", justifyContent:"center"
           }}>
-            <Zap size={14} color="#fff" />
+            <svg width="16" height="16" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <polygon points="45,82 55,82 53,40 47,40" fill="#fff"/>
+              <rect x="41" y="28" width="18" height="14" rx="2" fill="#fff"/>
+              <polygon points="50,11 38,28 62,28" fill="#fff"/>
+              <circle cx="50" cy="35" r="5" fill="#FBBF24"/>
+              <rect x="33" y="82" width="34" height="7" rx="3" fill="#fff"/>
+              <line x1="60" y1="29" x2="82" y2="13" stroke="#fff" strokeWidth="3" strokeLinecap="round"/>
+              <line x1="61" y1="33" x2="87" y2="33" stroke="#fff" strokeWidth="3" strokeLinecap="round"/>
+              <line x1="60" y1="37" x2="82" y2="53" stroke="#fff" strokeWidth="3" strokeLinecap="round"/>
+            </svg>
           </div>
           {!collapsed && (
             <div>
@@ -572,7 +590,7 @@ function PillarCard({ pillar, fullWidth }) {
 function InsightCard({ text }) {
   return (
     <div style={{
-      backgroundColor:'var(--surface)', borderRadius:12, border:`1px solid var(--border)`,
+      backgroundColor:'#E0F2FE', borderRadius:12, border:`1px solid #BAE6FD`,
       padding:"18px 22px", marginBottom:20,
       display:"flex", gap:14, alignItems:"flex-start"
     }}>
@@ -899,12 +917,6 @@ function QuerySelector({ activeQueryId, setActiveQueryId, setNav, chatOpen, onTo
         }}
       >
         <div style={{ display:"flex", alignItems:"center", gap:10, minWidth:0 }}>
-          <div style={{
-            width:28, height:28, borderRadius:6, backgroundColor:'var(--primary-light)',
-            display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0
-          }}>
-            <Zap size={13} color="var(--primary)" />
-          </div>
           <div style={{ minWidth:0 }}>
             <div style={{ fontSize:13, fontWeight:600, color:'var(--text)', overflow:"hidden", textOverflow:"ellipsis", whiteSpace:"nowrap" }}>
               {active.initiative}
@@ -917,7 +929,7 @@ function QuerySelector({ activeQueryId, setActiveQueryId, setNav, chatOpen, onTo
         <div style={{ display:"flex", alignItems:"center", gap:10, flexShrink:0, marginLeft:12 }}>
           <ConfDots list={active.confidence} />
           <ChevronRight size={14} color="var(--text-muted)"
-            style={{ transform: open ? "rotate(90deg)" : "rotate(0deg)", transition:"transform 0.15s" }}
+            style={{ transform: open ? "rotate(270deg)" : "rotate(90deg)", transition:"transform 0.15s" }}
           />
         </div>
       </button>

@@ -28,86 +28,215 @@ const C = {
   },
 };
 
-// ─── Briefing data ────────────────────────────────────────────────────────────
-const BRIEFING = {
-  initiative: "Rediseño onboarding",
-  celula:     "Célula Postventa",
-  generated:  "17 jun 2026 · 09:41",
-  processingTime: "11s",
-  insight: "La caída de conversión está asociada al abandono en el paso 3 del onboarding (solicitud de permisos). Los usuarios de 18–24 años presentan una tasa de abandono un 40% mayor al promedio, hecho confirmado por el estudio UX de marzo 2026. Resolver la fricción en ese paso puntual podría recuperar entre 1.200 y 1.800 activaciones mensuales.",
-  pillars: [
-    {
-      id:"metricas", icon:BarChart2, title:"Métricas actuales", short:"Métricas",
-      confidence:"alto", source:"Looker", date:"jun 2026", type:"metrics",
-      rows:[
-        { label:"Conversión onboarding", value:"5.4%",   dir:"down", note:"−1.2% vs mes anterior" },
-        { label:"Abandono en paso 3",    value:"34%",    dir:"up",   note:"+8% vs Q1 2026"        },
-        { label:"Tiempo en paso 3",      value:"1m 42s", dir:"up",   note:"+22s vs baseline"      },
-      ]
-    },
-    {
-      id:"usuarios", icon:Users, title:"Usuarios afectados", short:"Usuarios",
-      confidence:"medio", source:"Analytics", date:"jun 2026", type:"users",
-      rows:[
-        { label:"Usuarios nuevos/mes en riesgo", value:"~14.200",    note:"Estimación por funnel"       },
-        { label:"Segmento más crítico",          value:"18–24 años", note:"Mobile-first, 38% del total" },
-        { label:"Plataforma principal",          value:"Android",    note:"78% de los abandonos"        },
-      ]
-    },
-    {
-      id:"hipotesis", icon:Lightbulb, title:"Hipótesis existentes", short:"Hipótesis",
-      confidence:"medio", source:"Notion", date:"abr 2026", type:"hypotheses",
-      items:[
-        { text:"La solicitud de permisos en el paso 3 genera desconfianza y abandono prematuro",     status:"sin validar"           },
-        { text:"Los usuarios Android perciben más fricción en el paso de verificación de identidad", status:"parcialmente validada" },
-        { text:"Reducir el flujo de 6 a 4 pasos incrementaría la conversión en +2pp",               status:"sin validar"           },
-      ]
-    },
-    {
-      id:"investigaciones", icon:BookOpen, title:"Investigaciones relacionadas", short:"Investigaciones",
-      confidence:"alto", source:"Notion", date:"mar 2026", type:"research",
-      items:[
-        { title:"Fricción percibida en onboarding móvil", type:"UX Research",    date:"mar 2026", relevance:"alta"  },
-        { title:"Test de usabilidad — Flujo de registro", type:"Usability Test", date:"ene 2026", relevance:"media" },
-      ]
-    },
-    {
-      id:"impacto", icon:TrendingUp, title:"Impacto esperado", short:"Impacto",
-      confidence:"bajo", source:"Estimación interna", date:"jun 2026", type:"impact",
-      items:[
-        { metric:"Conversión onboarding",  expected:"+1.5 a +2pp",  note:"Si se resuelve el abandono en paso 3" },
-        { metric:"Activaciones mensuales", expected:"+1.200–1.800", note:"Proyección conservadora"              },
-        { metric:"Revenue asociado",       expected:"En análisis",  note:"Pendiente validación con negocio"     },
-      ]
-    },
-  ]
-};
-
 // ─── History data ─────────────────────────────────────────────────────────────
 const HISTORY_INITIAL = [
   {
-    id:0, initiative:"Rediseño onboarding",
-    celula:"Célula Postventa", date:"17 jun 2026", processingTime:"11s",
-    confidence:["alto","medio","medio","alto","bajo"],
-    insight:"La caída de conversión está asociada al abandono en el paso 3 (solicitud de permisos).",
+    id:0, initiative:"Onboarding de un nuevo servicio",
+    celula:"Célula Fibra-Flow", date:"28 jun 2026", processingTime:"10s",
+    confidence:["medio","alto","bajo","medio","bajo"],
+    insight:"Se lanza un nuevo plan y hay que diseñar el onboarding: qué fricciones tuvieron onboardings anteriores, qué dice el research sobre usuarios nuevos de esos verticales, y qué componentes del Design System ya existen para ese tipo de flujo.",
+    pillars: [
+      {
+        id:"metricas", icon:BarChart2, title:"Métricas actuales", short:"Métricas",
+        confidence:"medio", source:"Looker", date:"jun 2026", type:"metrics",
+        rows:[
+          { label:"Conversión onboarding (planes existentes)", value:"61%",    dir:"down", note:"−4% vs trimestre anterior" },
+          { label:"Abandono en verificación de domicilio",     value:"22%",    dir:"up",   note:"Histórico en lanzamientos previos" },
+          { label:"Tiempo promedio de alta",                   value:"6m 50s", dir:"up",   note:"+1m vs benchmark de categoría" },
+        ]
+      },
+      {
+        id:"usuarios", icon:Users, title:"Usuarios afectados", short:"Usuarios",
+        confidence:"alto", source:"Analytics", date:"jun 2026", type:"users",
+        rows:[
+          { label:"Usuarios potenciales del nuevo plan (mes 1)", value:"~9.800",        note:"Proyección de altas según plan de marketing" },
+          { label:"Segmento más relevante",                      value:"Hogares sin FTTH", note:"62% del universo direccionable"            },
+          { label:"Canal de alta principal",                     value:"App Mi Personal", note:"54% de las altas digitales"                 },
+        ]
+      },
+      {
+        id:"hipotesis", icon:Lightbulb, title:"Hipótesis existentes", short:"Hipótesis",
+        confidence:"bajo", source:"Notion", date:"abr 2026", type:"hypotheses",
+        items:[
+          { text:"El paso de verificación de domicilio genera abandono por falta de claridad sobre cobertura", status:"sin validar"           },
+          { text:"Reutilizar el Design System de onboarding validado en otros verticales acelera la entrega",  status:"sin validar"           },
+          { text:"Reducir el formulario de alta de 5 a 3 pantallas mejoraría la conversión en +3pp",            status:"parcialmente validada" },
+        ]
+      },
+      {
+        id:"investigaciones", icon:BookOpen, title:"Investigaciones relacionadas", short:"Investigaciones",
+        confidence:"medio", source:"Notion", date:"feb 2026", type:"research",
+        items:[
+          { title:"Fricciones en onboardings de planes anteriores (Internet, Móvil)", type:"UX Research", date:"feb 2026", relevance:"alta"  },
+          { title:"Expectativas de usuarios nuevos en verticales de conectividad",     type:"Entrevistas", date:"dic 2025", relevance:"media" },
+        ]
+      },
+      {
+        id:"impacto", icon:TrendingUp, title:"Impacto esperado", short:"Impacto",
+        confidence:"bajo", source:"Estimación interna", date:"jun 2026", type:"impact",
+        items:[
+          { metric:"Conversión onboarding nuevo plan", expected:"+5 a +8pp vs benchmark", note:"Si se reutilizan componentes del Design System" },
+          { metric:"Tiempo de entrega del flujo",       expected:"−30% en desarrollo",      note:"Por reutilización de componentes existentes"   },
+          { metric:"Activaciones mes 1",                expected:"~6.000–7.000",            note:"Estimación conservadora sobre universo direccionable" },
+        ]
+      },
+    ]
   },
   {
-    id:1, initiative:"Optimización de checkout",
-    celula:"Célula Checkout", date:"14 jun 2026", processingTime:"9s",
-    confidence:["alto","alto","medio","medio","medio"],
-    insight:"La fricción en el paso de pago está generando un 28% de abandono en usuarios first-time.",
-  },
-  {
-    id:2, initiative:"Rediseño de la navegación principal",
-    celula:"Célula Retención", date:"10 jun 2026", processingTime:"14s",
-    confidence:["medio","medio","bajo","alto","bajo"],
-    insight:"Los usuarios frecuentes reportan dificultad para encontrar funcionalidades recientes.",
-  },
-  {
-    id:3, initiative:"Notificaciones push personalizadas",
-    celula:"Célula Engagement", date:"5 jun 2026", processingTime:"7s",
+    id:1, initiative:"Campaña de venta de productos en Tienda",
+    celula:"Célula Tienda", date:"24 jun 2026", processingTime:"12s",
     confidence:["alto","medio","alto","medio","bajo"],
-    insight:"La tasa de opt-in de notificaciones es un 35% menor en Android que en iOS.",
+    insight:"Se requiere sumar e incentivar la campaña masiva de Tienda sobre Cyberweek, y la campaña de lanzamiento de la nueva línea de productos Apple.",
+    pillars: [
+      {
+        id:"metricas", icon:BarChart2, title:"Métricas actuales", short:"Métricas",
+        confidence:"alto", source:"Looker", date:"jun 2026", type:"metrics",
+        rows:[
+          { label:"Conversión Tienda online (último Cyberweek)", value:"3.8%",      dir:"up", note:"+0.6pp vs Cyberweek anterior" },
+          { label:"Ticket promedio categoría Apple",             value:"$612.400",  dir:"up", note:"+18% vs trimestre anterior"   },
+          { label:"Tráfico estimado durante Cyberweek",          value:"+140%",     dir:"up", note:"vs tráfico promedio mensual"  },
+        ]
+      },
+      {
+        id:"usuarios", icon:Users, title:"Usuarios afectados", short:"Usuarios",
+        confidence:"medio", source:"Analytics", date:"jun 2026", type:"users",
+        rows:[
+          { label:"Usuarios alcanzables en base CRM",        value:"~210.000", note:"Segmento con histórico de compra en Tienda" },
+          { label:"Interesados en línea Apple (intención)",  value:"~38.000",  note:"Según señales de navegación, últimos 30 días" },
+          { label:"Dispositivo principal de compra",         value:"Mobile",   note:"71% de las transacciones de Tienda"         },
+        ]
+      },
+      {
+        id:"hipotesis", icon:Lightbulb, title:"Hipótesis existentes", short:"Hipótesis",
+        confidence:"alto", source:"Notion", date:"may 2026", type:"hypotheses",
+        items:[
+          { text:"Comunicar stock limitado y envío gratis aumenta la conversión durante Cyberweek",                      status:"parcialmente validada" },
+          { text:"Un bundle de financiación destacado en el PDP de Apple mejora el ticket promedio",                      status:"sin validar"           },
+          { text:"Los usuarios con un producto Apple ya registrado convierten 2x más rápido en cross-sell de accesorios", status:"parcialmente validada" },
+        ]
+      },
+      {
+        id:"investigaciones", icon:BookOpen, title:"Investigaciones relacionadas", short:"Investigaciones",
+        confidence:"medio", source:"Notion", date:"abr 2026", type:"research",
+        items:[
+          { title:"Comportamiento de compra en Cyberweek 2025",                type:"Analytics Deep Dive", date:"dic 2025", relevance:"alta"  },
+          { title:"Percepción de precio y financiación en categoría Apple",    type:"Encuesta a clientes", date:"feb 2026", relevance:"media" },
+        ]
+      },
+      {
+        id:"impacto", icon:TrendingUp, title:"Impacto esperado", short:"Impacto",
+        confidence:"bajo", source:"Estimación interna", date:"jun 2026", type:"impact",
+        items:[
+          { metric:"Ventas incrementales Cyberweek",         expected:"+25% a +35%",  note:"vs semana equivalente sin campaña"        },
+          { metric:"Unidades línea Apple (mes de lanzamiento)", expected:"~4.500–5.200", note:"Proyección según funnel de intención"   },
+          { metric:"Revenue asociado",                        expected:"En análisis",  note:"Pendiente de validar pricing con Comercial" },
+        ]
+      },
+    ]
+  },
+  {
+    id:2, initiative:"Flujo transaccional Autogestión — Reserva de turno",
+    celula:"Célula Posventa", date:"20 jun 2026", processingTime:"8s",
+    confidence:["medio","medio","alto","bajo","medio"],
+    insight:"Se requiere sumar una nueva funcionalidad en la cual los usuarios puedan reservar un turno en sucursales.",
+    pillars: [
+      {
+        id:"metricas", icon:BarChart2, title:"Métricas actuales", short:"Métricas",
+        confidence:"medio", source:"Looker", date:"jun 2026", type:"metrics",
+        rows:[
+          { label:"Visitas a sucursal sin turno previo", value:"44%",       dir:"up", note:"Genera demoras de atención y reclamos" },
+          { label:"Llamadas a call center por turnos",   value:"~18.000/mes", dir:"up", note:"+9% vs mes anterior"                  },
+          { label:"Uso de Autogestión (usuarios activos)", value:"62%",     dir:"up", note:"Base de clientes con cuenta activa"     },
+        ]
+      },
+      {
+        id:"usuarios", icon:Users, title:"Usuarios afectados", short:"Usuarios",
+        confidence:"medio", source:"Analytics", date:"jun 2026", type:"users",
+        rows:[
+          { label:"Usuarios que visitan sucursal por mes", value:"~95.000",       note:"Estimación según tickets de atención" },
+          { label:"Segmento con mayor fricción",            value:"Posventa técnica", note:"Reclamos y cambios de equipo"      },
+          { label:"Plataforma principal de uso",            value:"App Mi Personal", note:"68% de las sesiones de Autogestión" },
+        ]
+      },
+      {
+        id:"hipotesis", icon:Lightbulb, title:"Hipótesis existentes", short:"Hipótesis",
+        confidence:"alto", source:"Notion", date:"may 2026", type:"hypotheses",
+        items:[
+          { text:"Permitir reservar turno desde Autogestión reduce las visitas sin atención disponible", status:"parcialmente validada" },
+          { text:"Mostrar disponibilidad en tiempo real disminuye las llamadas al call center",          status:"sin validar"           },
+          { text:"Recordatorios automáticos del turno bajan el ausentismo en sucursal",                  status:"parcialmente validada" },
+        ]
+      },
+      {
+        id:"investigaciones", icon:BookOpen, title:"Investigaciones relacionadas", short:"Investigaciones",
+        confidence:"bajo", source:"Notion", date:"feb 2026", type:"research",
+        items:[
+          { title:"Experiencia de atención en sucursales físicas",       type:"UX Research",         date:"nov 2025", relevance:"alta"  },
+          { title:"Benchmark de reserva de turnos en otras industrias",  type:"Research competitivo", date:"ene 2026", relevance:"media" },
+        ]
+      },
+      {
+        id:"impacto", icon:TrendingUp, title:"Impacto esperado", short:"Impacto",
+        confidence:"medio", source:"Estimación interna", date:"jun 2026", type:"impact",
+        items:[
+          { metric:"Visitas sin atención disponible",        expected:"−20% a −30%",   note:"Si se habilita reserva desde Autogestión"   },
+          { metric:"Llamadas al call center por turnos",      expected:"−15%",          note:"Proyección conservadora"                    },
+          { metric:"Satisfacción de atención en sucursal (CSAT)", expected:"+6 a +9 puntos", note:"Estimado según research de experiencia" },
+        ]
+      },
+    ]
+  },
+  {
+    id:3, initiative:"Flujo Cross-selling",
+    celula:"Célula Cross-selling", date:"16 jun 2026", processingTime:"9s",
+    confidence:["alto","bajo","medio","medio","alto"],
+    insight:"Se requiere sumar cross-selling de un Extensor para usuarios que tienen internet o están por contratar, y cross-selling con usuarios que terminan de pagar algo en Autogestión.",
+    pillars: [
+      {
+        id:"metricas", icon:BarChart2, title:"Métricas actuales", short:"Métricas",
+        confidence:"alto", source:"Looker", date:"jun 2026", type:"metrics",
+        rows:[
+          { label:"Adjunto de Extensor en altas de Internet",    value:"7%",   dir:"down", note:"Muy por debajo del potencial estimado" },
+          { label:"Cross-sell post-pago en Autogestión",          value:"3.1%", dir:"up",   note:"+0.4pp vs mes anterior"                },
+          { label:"Usuarios con internet y cobertura WiFi débil", value:"31%",  dir:"up",   note:"Según diagnóstico de señal en app"     },
+        ]
+      },
+      {
+        id:"usuarios", icon:Users, title:"Usuarios afectados", short:"Usuarios",
+        confidence:"bajo", source:"Analytics", date:"jun 2026", type:"users",
+        rows:[
+          { label:"Usuarios con internet activo, sin Extensor",  value:"~340.000",   note:"Universo potencial de cross-sell"      },
+          { label:"Usuarios por contratar internet (en funnel)", value:"~12.000/mes", note:"Leads activos en proceso de alta"      },
+          { label:"Pagos completados en Autogestión por mes",    value:"~480.000",   note:"Punto de contacto para ofrecer cross-sell" },
+        ]
+      },
+      {
+        id:"hipotesis", icon:Lightbulb, title:"Hipótesis existentes", short:"Hipótesis",
+        confidence:"medio", source:"Notion", date:"may 2026", type:"hypotheses",
+        items:[
+          { text:"Ofrecer el Extensor en el mismo flujo de alta de internet aumenta el adjunto sin fricción adicional",          status:"sin validar"           },
+          { text:"Mostrar el diagnóstico de señal WiFi como disparador del cross-sell mejora la conversión",                     status:"parcialmente validada" },
+          { text:"Ofrecer cross-selling justo después de un pago exitoso en Autogestión tiene mejor receptividad que por push",  status:"parcialmente validada" },
+        ]
+      },
+      {
+        id:"investigaciones", icon:BookOpen, title:"Investigaciones relacionadas", short:"Investigaciones",
+        confidence:"medio", source:"Notion", date:"mar 2026", type:"research",
+        items:[
+          { title:"Percepción de calidad de WiFi en el hogar",                       type:"Encuesta a clientes", date:"ene 2026", relevance:"alta"  },
+          { title:"Momentos de mayor receptividad a ofertas (research de journeys)", type:"UX Research",         date:"dic 2025", relevance:"media" },
+        ]
+      },
+      {
+        id:"impacto", icon:TrendingUp, title:"Impacto esperado", short:"Impacto",
+        confidence:"alto", source:"Estimación interna", date:"jun 2026", type:"impact",
+        items:[
+          { metric:"Adjunto de Extensor en altas",       expected:"+10 a +14pp",   note:"Si se integra en el flujo de alta de internet" },
+          { metric:"Conversión cross-sell post-pago",     expected:"+1.5 a +2pp",  note:"Sobre el total de pagos en Autogestión"         },
+          { metric:"Revenue incremental mensual",         expected:"En análisis",  note:"Pendiente de validar pricing de Extensor"       },
+        ]
+      },
+    ]
   }
 ];
 
@@ -641,40 +770,37 @@ function CoverageBar({ pillars }) {
 
 // ─── Query Selector ──────────────────────────────────────────────────────────
 // ─── Chat: system prompt builder ─────────────────────────────────────────────
-function buildSystemPrompt(activeItem, isFullBriefing) {
-  if (isFullBriefing) {
-    const p = BRIEFING.pillars;
-    const metrics   = p[0].rows.map(r => `- ${r.label}: ${r.value} (${r.note})`).join("\n");
-    const users     = p[1].rows.map(r => `- ${r.label}: ${r.value} — ${r.note}`).join("\n");
-    const hypos     = p[2].items.map((h,i) => `${i+1}. "${h.text}" [${h.status}]`).join("\n");
-    const research  = p[3].items.map(r => `- "${r.title}" (${r.type}, ${r.date}, relevancia ${r.relevance})`).join("\n");
-    const impact    = p[4].items.map(r => `- ${r.metric}: ${r.expected} — ${r.note}`).join("\n");
-    return `Sos un agente de análisis UX y producto en la plataforma DI/UX de Telecom/Personal Argentina. Tu rol es ayudar a los equipos a profundizar en la evidencia disponible para tomar mejores decisiones de diseño y producto.
+function buildSystemPrompt(activeItem) {
+  const p = activeItem.pillars;
+  const metrics   = p[0].rows.map(r => `- ${r.label}: ${r.value} (${r.note})`).join("\n");
+  const users     = p[1].rows.map(r => `- ${r.label}: ${r.value} — ${r.note}`).join("\n");
+  const hypos     = p[2].items.map((h,i) => `${i+1}. "${h.text}" [${h.status}]`).join("\n");
+  const research  = p[3].items.map(r => `- "${r.title}" (${r.type}, ${r.date}, relevancia ${r.relevance})`).join("\n");
+  const impact    = p[4].items.map(r => `- ${r.metric}: ${r.expected} — ${r.note}`).join("\n");
+  return `Sos un agente de análisis UX y producto en la plataforma Personal Beacon de Telecom/Personal Argentina. Tu rol es ayudar a los equipos a profundizar en la evidencia disponible para tomar mejores decisiones de diseño y producto.
 
 Tenés cargado el siguiente briefing:
 
-## Iniciativa: ${BRIEFING.initiative}
-Célula: ${BRIEFING.celula}
-Insight principal: ${BRIEFING.insight}
+## Iniciativa: ${activeItem.initiative}
+Célula: ${activeItem.celula}
+Insight principal: ${activeItem.insight}
 
-## Métricas actuales · Fuente: Looker · Confianza alta
+## ${p[0].title} · Fuente: ${p[0].source} · Confianza ${C.conf[p[0].confidence].label.toLowerCase()}
 ${metrics}
 
-## Usuarios afectados · Fuente: Analytics · Confianza media
+## ${p[1].title} · Fuente: ${p[1].source} · Confianza ${C.conf[p[1].confidence].label.toLowerCase()}
 ${users}
 
-## Hipótesis existentes · Fuente: Notion · Confianza media
+## ${p[2].title} · Fuente: ${p[2].source} · Confianza ${C.conf[p[2].confidence].label.toLowerCase()}
 ${hypos}
 
-## Investigaciones relacionadas · Fuente: Notion · Confianza alta
+## ${p[3].title} · Fuente: ${p[3].source} · Confianza ${C.conf[p[3].confidence].label.toLowerCase()}
 ${research}
 
-## Impacto esperado · Fuente: Estimación interna · Confianza baja
+## ${p[4].title} · Fuente: ${p[4].source} · Confianza ${C.conf[p[4].confidence].label.toLowerCase()}
 ${impact}
 
 Instrucciones: respondé siempre en español, de forma concisa y accionable. Priorizá insights por sobre explicaciones. Justificá recomendaciones con datos del briefing. Señalá gaps o riesgos cuando los detectes. Si te preguntan algo fuera del briefing, indicalo y sugerí cómo conseguir esos datos.`;
-  }
-  return `Sos un agente de análisis UX en la plataforma DI/UX. Estás analizando la iniciativa "${activeItem.initiative}" (${activeItem.celula}). Insight disponible: ${activeItem.insight}. Respondé en español, de forma concisa. Si el usuario pide datos específicos no disponibles en el resumen, sugerí regenerar la consulta completa.`;
 }
 
 // ─── Chat: Message bubble ─────────────────────────────────────────────────────
@@ -719,10 +845,10 @@ const STARTERS = [
   "¿Qué hipótesis priorizarías validar primero?",
   "¿Cuáles son los principales riesgos no contemplados?",
   "¿Qué métricas adicionales deberíamos medir?",
-  "¿Cómo impacta esto en los usuarios de Android específicamente?",
+  "¿Cómo impacta esto en el segmento de usuarios más crítico?",
 ];
 
-function ChatPanel({ activeItem, isFullBriefing, onClose }) {
+function ChatPanel({ activeItem, onClose }) {
   const [messages, setMessages] = useState([{
     id:0, role:"assistant",
     content:`¡Hola! Tengo cargado el briefing de **${activeItem.initiative}**. Puedo ayudarte a profundizar en cualquier aspecto — métricas, hipótesis, usuarios afectados o riesgos. ¿Por dónde querés empezar?`
@@ -753,7 +879,7 @@ function ChatPanel({ activeItem, isFullBriefing, onClose }) {
         body: JSON.stringify({
           model:"claude-sonnet-4-6",
           max_tokens:1000,
-          system: buildSystemPrompt(activeItem, isFullBriefing),
+          system: buildSystemPrompt(activeItem),
           messages: next.map(m => ({ role:m.role, content:m.content }))
         })
       });
@@ -1091,13 +1217,8 @@ function InicioBriefing({ activeQueryId, setActiveQueryId, setNav, historyItems 
   const [chatOpen,    setChatOpen]    = useState(false);
   const [showDetail,  setShowDetail]  = useState(false);
   const items = historyItems || HISTORY;
-  const isFullBriefing = activeQueryId === 0 || !(items.some(h => h.id === activeQueryId && h.id !== 0));
   const activeItem = items.find(h => h.id === activeQueryId) || items[0];
   const isDemo = activeQueryId === 0;
-
-  const coveragePillars = isDemo
-    ? BRIEFING.pillars
-    : BRIEFING.pillars.map((p, i) => ({ ...p, confidence: activeItem.confidence[i] || "bajo" }));
 
   useEffect(() => { setChatOpen(false); setShowDetail(false); }, [activeQueryId]);
 
@@ -1114,11 +1235,7 @@ function InicioBriefing({ activeQueryId, setActiveQueryId, setNav, historyItems 
           onToggleChat={() => setChatOpen(o => !o)}
           historyItems={historyItems}
         />
-        <CoverageBar
-          pillars={coveragePillars}
-          generated={isDemo ? BRIEFING.generated : activeItem.date}
-          processingTime={isDemo ? BRIEFING.processingTime : activeItem.processingTime}
-        />
+        <CoverageBar pillars={activeItem.pillars} />
         {showCards ? (
           <>
             {!isDemo && (
@@ -1132,13 +1249,13 @@ function InicioBriefing({ activeQueryId, setActiveQueryId, setNav, historyItems 
                 </button>
               </div>
             )}
-            <InsightCard text={activeItem.insight || BRIEFING.insight} />
+            <InsightCard text={activeItem.insight} />
             <div className="di-pillar-grid">
-              <PillarCard pillar={BRIEFING.pillars[0]} />
-              <PillarCard pillar={BRIEFING.pillars[1]} />
-              <PillarCard pillar={BRIEFING.pillars[2]} />
-              <PillarCard pillar={BRIEFING.pillars[3]} />
-              <PillarCard pillar={BRIEFING.pillars[4]} fullWidth />
+              <PillarCard pillar={activeItem.pillars[0]} />
+              <PillarCard pillar={activeItem.pillars[1]} />
+              <PillarCard pillar={activeItem.pillars[2]} />
+              <PillarCard pillar={activeItem.pillars[3]} />
+              <PillarCard pillar={activeItem.pillars[4]} fullWidth />
             </div>
           </>
         ) : (
@@ -1148,7 +1265,6 @@ function InicioBriefing({ activeQueryId, setActiveQueryId, setNav, historyItems 
       {chatOpen && (
         <ChatPanel
           activeItem={activeItem}
-          isFullBriefing={isDemo}
           onClose={() => setChatOpen(false)}
         />
       )}
@@ -1164,13 +1280,8 @@ const ALL_PILLARS = [
   { id:"investigaciones",label:"Investigaciones"          },
   { id:"impacto",        label:"Impacto esperado"         },
 ];
-const SUGGESTIONS = [
-  "Rediseño del flujo de pago",
-  "Optimización de búsqueda en App",
-  "Nueva experiencia de configuración de cuenta",
-  "Mejora del proceso de recuperación de contraseña",
-];
-const CELULAS = ["Tienda","Postventa","Entretenimiento","Checkout","Home","Conectividad","Tech"];
+const SUGGESTIONS = HISTORY_INITIAL.map(h => h.initiative);
+const CELULAS = ["Tienda","Posventa","Fibra-Flow","Cross-selling","Entretenimiento","Checkout","Home","Conectividad","Tech"];
 
 function GeneratingState({ step }) {
   return (
@@ -1204,6 +1315,26 @@ function GeneratingState({ step }) {
   );
 }
 
+function buildGenericPillars() {
+  return [
+    { id:"metricas", icon:BarChart2, title:"Métricas actuales", short:"Métricas", confidence:"bajo", source:"Looker", date:"jun 2026", type:"metrics", rows:[
+      { label:"Datos disponibles", value:"En proceso", note:"Aún no hay métricas históricas asociadas a esta iniciativa" },
+    ]},
+    { id:"usuarios", icon:Users, title:"Usuarios afectados", short:"Usuarios", confidence:"bajo", source:"Analytics", date:"jun 2026", type:"users", rows:[
+      { label:"Segmento", value:"Por definir", note:"Se completará cuando se identifiquen los usuarios impactados" },
+    ]},
+    { id:"hipotesis", icon:Lightbulb, title:"Hipótesis existentes", short:"Hipótesis", confidence:"bajo", source:"Notion", date:"jun 2026", type:"hypotheses", items:[
+      { text:"Sin hipótesis registradas aún para esta iniciativa", status:"sin validar" },
+    ]},
+    { id:"investigaciones", icon:BookOpen, title:"Investigaciones relacionadas", short:"Investigaciones", confidence:"bajo", source:"Notion", date:"jun 2026", type:"research", items:[
+      { title:"No se encontraron investigaciones relacionadas", type:"—", date:"—", relevance:"baja" },
+    ]},
+    { id:"impacto", icon:TrendingUp, title:"Impacto esperado", short:"Impacto", confidence:"bajo", source:"Estimación interna", date:"jun 2026", type:"impact", items:[
+      { metric:"Por estimar", expected:"—", note:"El impacto se calculará una vez definido el alcance" },
+    ]},
+  ];
+}
+
 function NuevaConsulta({ onGenerate }) {
   const [initiative,      setInitiative]      = useState("");
   const [celula,          setCelula]          = useState("Tienda");
@@ -1222,15 +1353,27 @@ function NuevaConsulta({ onGenerate }) {
   const handleGenerate = () => {
     setIsGenerating(true);
     setStep(0);
-    const newItem = {
-      id: Date.now(),
-      initiative: initiative.trim(),
-      celula: celula,
-      date: new Date().toLocaleDateString('es-AR', { day:'numeric', month:'short', year:'numeric' }),
-      processingTime: "—",
-      confidence: ["medio","medio","medio","medio","bajo"],
-      insight: "Procesando el briefing de esta iniciativa. Los resultados estarán disponibles en breve."
-    };
+    const matched = HISTORY_INITIAL.find(
+      h => h.initiative.trim().toLowerCase() === initiative.trim().toLowerCase()
+    );
+    const newItem = matched
+      ? {
+          ...matched,
+          id: Date.now(),
+          date: new Date().toLocaleDateString('es-AR', { day:'numeric', month:'short', year:'numeric' }),
+        }
+      : {
+          id: Date.now(),
+          initiative: initiative.trim(),
+          celula: `Célula ${celula}`,
+          date: new Date().toLocaleDateString('es-AR', { day:'numeric', month:'short', year:'numeric' }),
+          processingTime: `${Math.floor(Math.random()*5)+7}s`,
+          confidence: ["medio","medio","medio","medio","bajo"],
+          insight: description.trim()
+            ? `Briefing generado a partir de la consulta: "${description.trim()}". Por tratarse de una iniciativa nueva, los pilares se completarán a medida que haya más datos disponibles.`
+            : "Briefing generado para esta iniciativa.",
+          pillars: buildGenericPillars(),
+        };
     let current = 0;
     const iv = setInterval(() => {
       current++;
@@ -1291,13 +1434,24 @@ function NuevaConsulta({ onGenerate }) {
                 Iniciativas recientes
               </div>
               {SUGGESTIONS.map((s, i) => (
-                <button key={i} onMouseDown={() => setInitiative(s)} style={{
+                <button key={i} onMouseDown={() => {
+                  setInitiative(s);
+                  const match = HISTORY_INITIAL.find(h => h.initiative === s);
+                  if (match) setCelula(match.celula.replace("Célula ", ""));
+                }} style={{
                   display:"flex", alignItems:"center", gap:10, width:"100%",
                   padding:"9px 14px", border:"none", backgroundColor:"transparent",
                   cursor:"pointer", textAlign:"left", fontSize:13, color:"var(--text)", fontFamily:"inherit"
                 }}>
                   <Clock size={13} color="var(--text-muted)" />
-                  {s}
+                  <span style={{ flex:1 }}>{s}</span>
+                  <span style={{
+                    fontSize:9, fontWeight:700, color:"#16A34A", backgroundColor:"#F0FDF4",
+                    border:"1px solid #16A34A30", borderRadius:20, padding:"2px 7px",
+                    textTransform:"uppercase", letterSpacing:"0.04em", flexShrink:0
+                  }}>
+                    Con datos
+                  </span>
                 </button>
               ))}
             </div>

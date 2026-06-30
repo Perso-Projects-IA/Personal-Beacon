@@ -1747,7 +1747,7 @@ function Historial({ historyItems, savedIds, onToggleSave, onView }) {
             item={item}
             savedIds={savedIds}
             onToggleSave={onToggleSave}
-            onView={onView}
+            onView={() => onView(item.id)}
           />
         ))
       )}
@@ -1799,7 +1799,7 @@ function Guardados({ historyItems, savedIds, onToggleSave, onView }) {
             </div>
             <p style={{ fontSize:12, color:'var(--text-sub)', margin:0, lineHeight:1.5 }}>"{item.insight}"</p>
             <div style={{ borderTop:`1px solid var(--border-light)`, paddingTop:12 }}>
-              <button onClick={onView} style={{
+              <button onClick={() => onView(item.id)} style={{
                 display:"flex", alignItems:"center", gap:6, padding:"7px 14px",
                 borderRadius:8, border:"none", backgroundColor:"var(--primary)",
                 color:"#fff", fontSize:12, fontWeight:600, cursor:"pointer"
@@ -2201,8 +2201,8 @@ export default function App() {
         }
         setNav("inicio");
       }} />);
-      case "historial": return scroll(<Historial historyItems={historyItems} savedIds={savedIds} onToggleSave={toggleSaved} onView={() => setNav("inicio")} />);
-      case "guardados": return scroll(<Guardados historyItems={historyItems} savedIds={savedIds} onToggleSave={toggleSaved} onView={() => setNav("inicio")} />);
+      case "historial": return scroll(<Historial historyItems={historyItems} savedIds={savedIds} onToggleSave={toggleSaved} onView={(id) => { setActiveQueryId(id); setNav("inicio"); }} />);
+      case "guardados": return scroll(<Guardados historyItems={historyItems} savedIds={savedIds} onToggleSave={toggleSaved} onView={(id) => { setActiveQueryId(id); setNav("inicio"); }} />);
       case "config":    return scroll(<Configuracion />);
       default:          return null;
     }

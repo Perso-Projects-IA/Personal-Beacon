@@ -989,7 +989,7 @@ function QuerySelector({ activeQueryId, setActiveQueryId, setNav, chatOpen, onTo
           disabled={chatOpen}
         >
           <Zap size={12} color="#fff" />
-          Agente IA
+          Chat
         </button>
       </div>
     </div>

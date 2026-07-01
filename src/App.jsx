@@ -5,7 +5,7 @@ import {
   ExternalLink, Zap, ChevronRight, ChevronLeft, Check, X,
   Search, Filter, Trash2, Eye, EyeOff, Mail, Lock,
   Database, FileText, Bell, Monitor, User, AlertCircle, Moon, Sun,
-  MessageSquare, Menu
+  MessageSquare, Menu, Layers, LayoutGrid, Star
 } from "lucide-react";
 
 // ─── Design tokens ────────────────────────────────────────────────────────────
@@ -80,7 +80,22 @@ const HISTORY_INITIAL = [
           { metric:"Activaciones mes 1",                expected:"~6.000–7.000",            note:"Estimación conservadora sobre universo direccionable" },
         ]
       },
-    ]
+    ],
+    proceso: {
+      etapa:"Etapa: Definir — Doble Diamante",
+      entregables:["Service blueprint del flujo actual","Mapa de fricción por paso","Definición del problema (HMW)","Brief de rediseño"],
+      actividades:['Workshop "How Might We"',"Análisis de sesiones Hotjar","Entrevistas a usuarios Android","Card sorting de permisos"],
+      componentes:["Stepper / Progress indicator","Permission request modal","Form — input validation states","CTA primaria mobile"],
+    },
+    jira:{
+      count:3,
+      tickets:[
+        { id:"CD-1041", title:"Research fricción onboarding",           status:"Hecho",     date:"mar 2026" },
+        { id:"CD-1087", title:"Análisis métricas paso 3",               status:"Hecho",     date:"may 2026" },
+        { id:"CD-1124", title:"Rediseño flujo onboarding Android",      status:"En curso",  date:"jun 2026" },
+        { id:"CD-1130", title:"Validación hipótesis reducción pasos",   status:"Pendiente", date:"—"        },
+      ],
+    },
   },
   {
     id:1, initiative:"Campaña de venta de productos en Tienda",
@@ -132,7 +147,22 @@ const HISTORY_INITIAL = [
           { metric:"Revenue asociado",                        expected:"En análisis",  note:"Pendiente de validar pricing con Comercial" },
         ]
       },
-    ]
+    ],
+    proceso: {
+      etapa:"Etapa: Idear — Doble Diamante",
+      entregables:["Wireframes del landing promocional","Mapa de journey de compra","Propuesta de mecánica de descuento","Brief creativo campaña"],
+      actividades:["Benchmarking de campañas similares","Workshop de ideación rápida","Test A/B de copies promocionales","Análisis de conversión histórico"],
+      componentes:["Banner hero fullwidth","Product card con badge de oferta","Countdown timer","Modal de confirmación de compra"],
+    },
+    jira:{
+      count:2,
+      tickets:[
+        { id:"TI-0231", title:"Landing Cyberweek — diseño UI",        status:"Hecho",     date:"may 2026" },
+        { id:"TI-0244", title:"Integración Apple Pay en checkout",     status:"En curso",  date:"jun 2026" },
+        { id:"TI-0251", title:"Test A/B banner promocional",           status:"En curso",  date:"jun 2026" },
+        { id:"TI-0258", title:"Optimización mobile del carrito",       status:"Pendiente", date:"—"        },
+      ],
+    },
   },
   {
     id:2, initiative:"Flujo transaccional Autogestión — Reserva de turno",
@@ -184,7 +214,22 @@ const HISTORY_INITIAL = [
           { metric:"Satisfacción de atención en sucursal (CSAT)", expected:"+6 a +9 puntos", note:"Estimado según research de experiencia" },
         ]
       },
-    ]
+    ],
+    proceso: {
+      etapa:"Etapa: Prototipar — Doble Diamante",
+      entregables:["Prototipo de flujo de reserva","Mapa de estados del turno","Guía de microinteracciones","Spec de notificaciones push"],
+      actividades:["Sesiones de usabilidad con usuarios","Análisis de drop-off por paso","Co-creación con equipo técnico","Pruebas de accesibilidad"],
+      componentes:["Calendar picker","Status tracker / stepper","Bottom sheet de confirmación","Notificación push inline"],
+    },
+    jira:{
+      count:3,
+      tickets:[
+        { id:"PS-0512", title:"Diseño flujo reserva de turno",         status:"Hecho",     date:"abr 2026" },
+        { id:"PS-0528", title:"Prototipo interactivo autogestión",      status:"Hecho",     date:"may 2026" },
+        { id:"PS-0541", title:"Handoff a desarrollo — fase 1",         status:"En curso",  date:"jun 2026" },
+        { id:"PS-0549", title:"QA y validación de accesibilidad",       status:"Pendiente", date:"—"        },
+      ],
+    },
   },
   {
     id:3, initiative:"Flujo Cross-selling",
@@ -236,7 +281,22 @@ const HISTORY_INITIAL = [
           { metric:"Revenue incremental mensual",         expected:"En análisis",  note:"Pendiente de validar pricing de Extensor"       },
         ]
       },
-    ]
+    ],
+    proceso: {
+      etapa:"Etapa: Descubrir — Doble Diamante",
+      entregables:["Research de oportunidades cross-sell","Mapa de momentos de oferta","Propuesta de valor diferencial","Brief de comunicación in-app"],
+      actividades:["Entrevistas a usuarios actuales","Análisis de patrones de uso","Workshop de oportunidades","Revisión de métricas de adopción"],
+      componentes:["Banner in-app contextual","Card de producto sugerido","Modal de oferta personalizada","CTA secundario de acción"],
+    },
+    jira:{
+      count:1,
+      tickets:[
+        { id:"XS-0089", title:"Research cross-selling extensor wifi",  status:"En curso",  date:"jun 2026" },
+        { id:"XS-0094", title:"Definición de momentos de oferta",      status:"En curso",  date:"jun 2026" },
+        { id:"XS-0101", title:"Prototipo de banner contextual",        status:"Pendiente", date:"—"        },
+        { id:"XS-0108", title:"Test de propuesta de valor",            status:"Pendiente", date:"—"        },
+      ],
+    },
   }
 ];
 
@@ -425,7 +485,7 @@ function Sidebar({ active, setActive, collapsed, onToggle }) {
         justifyContent: collapsed ? "center" : "space-between",
         borderBottom:"1px solid rgba(255,255,255,0.12)"
       }}>
-        <div style={{ display:"flex", alignItems:"center", gap:10 }}>
+        <div style={{ display:"flex", flexDirection:"column", alignItems:"flex-start", gap:6 }}>
           <div style={{
             width:30, height:30, borderRadius:8, flexShrink:0,
             backgroundColor:"rgba(255,255,255,0.2)",
@@ -623,7 +683,7 @@ function PillarCard({ pillar, fullWidth }) {
   return (
     <div style={{
       backgroundColor:'var(--surface)', borderRadius:12, border:`1px solid var(--border)`, display:"flex", flexDirection:"column",
-      gridColumn: fullWidth ? "span 2" : "span 1", overflow:"hidden"
+      gridColumn: fullWidth ? "1 / -1" : "span 1", overflow:"hidden"
     }}>
       <div style={{ padding:"16px 20px 12px", borderBottom:`1px solid var(--border-light)`, display:"flex", alignItems:"center", justifyContent:"space-between" }}>
         <div style={{ display:"flex", alignItems:"center", gap:10 }}>
@@ -640,8 +700,8 @@ function PillarCard({ pillar, fullWidth }) {
             {pillar.rows.map((row, i) => (
               <div key={i} style={{ display:"flex", alignItems:"center", justifyContent:"space-between", padding:"9px 12px", backgroundColor:'var(--row-bg)', borderRadius:8 }}>
                 <span style={{ fontSize:13, color:'var(--text-sub)' }}>{row.label}</span>
-                <div style={{ display:"flex", alignItems:"center", gap:6 }}>
-                  <span style={{ fontWeight:700, fontSize:16, color:'var(--text)' }}>{row.value}</span>
+                <div style={{ display:"flex", alignItems:"center", gap:10 }}>
+                  <span style={{ fontWeight:700, fontSize:14, color:'var(--text)' }}>{row.value}</span>
                   <TrendArrow dir={row.dir} />
                   <span style={{ fontSize:11, color:'var(--text-muted)' }}>{row.note}</span>
                 </div>
@@ -654,8 +714,8 @@ function PillarCard({ pillar, fullWidth }) {
             {pillar.rows.map((row, i) => (
               <div key={i} style={{ padding:"10px 12px", backgroundColor:'var(--row-bg)', borderRadius:8 }}>
                 <div style={{ fontSize:10, color:'var(--text-muted)', textTransform:"uppercase", letterSpacing:"0.06em", fontWeight:700, marginBottom:4 }}>{row.label}</div>
-                <div style={{ display:"flex", alignItems:"baseline", gap:8 }}>
-                  <span style={{ fontWeight:700, fontSize:18, color:'var(--text)' }}>{row.value}</span>
+                <div style={{ display:"flex", alignItems:"baseline", gap:12 }}>
+                  <span style={{ fontWeight:700, fontSize:14, color:'var(--text)' }}>{row.value}</span>
                   <span style={{ fontSize:12, color:'var(--text-sub)' }}>{row.note}</span>
                 </div>
               </div>
@@ -701,7 +761,7 @@ function PillarCard({ pillar, fullWidth }) {
             {pillar.items.map((item, i) => (
               <div key={i} style={{ padding:"16px", backgroundColor:'var(--row-bg)', borderRadius:8, textAlign:"center" }}>
                 <div style={{ fontSize:10, color:'var(--text-muted)', textTransform:"uppercase", letterSpacing:"0.07em", fontWeight:700, marginBottom:8 }}>{item.metric}</div>
-                <div style={{ fontSize:22, fontWeight:700, color:'var(--text)', marginBottom:4 }}>{item.expected}</div>
+                <div style={{ fontSize:14, fontWeight:700, color:'var(--text)', marginBottom:4 }}>{item.expected}</div>
                 <div style={{ fontSize:11, color:'var(--text-sub)', lineHeight:1.4 }}>{item.note}</div>
               </div>
             ))}
@@ -709,7 +769,7 @@ function PillarCard({ pillar, fullWidth }) {
         )}
       </div>
       <div style={{ padding:"10px 20px", borderTop:`1px solid var(--border-light)` }}>
-        <span style={{ fontSize:11, color:'var(--text-muted)' }}>Fuente:&nbsp;<strong style={{ color:'var(--text-sub)', fontWeight:600 }}>{source}</strong>&nbsp;· {date}</span>
+        <span style={{ fontSize:11, color:'var(--text-muted)' }}>Fuente:&nbsp;<a href="#" onClick={e => e.preventDefault()} style={{ color:'var(--primary)', fontWeight:600, textDecoration:"underline" }}>{source}</a>&nbsp;· {date}</span>
       </div>
     </div>
   );
@@ -719,19 +779,19 @@ function PillarCard({ pillar, fullWidth }) {
 function InsightCard({ text }) {
   return (
     <div style={{
-      backgroundColor:'var(--surface)', borderRadius:12, border:`1px solid var(--border)`,
+      backgroundColor:"var(--insight-bg)", borderRadius:12, border:`1px solid var(--insight-border)`,
       padding:"18px 22px", marginBottom:20,
       display:"flex", gap:14, alignItems:"flex-start"
     }}>
-      <div style={{ width:34, height:34, borderRadius:8, backgroundColor:'var(--primary-light)', display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0 }}>
-        <Zap size={15} color={'var(--primary)'} />
+      <div style={{ width:34, height:34, borderRadius:8, backgroundColor:'#0076C7', display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0 }}>
+        <Zap size={15} color={'#fff'} />
       </div>
       <div>
         <div style={{ display:"flex", alignItems:"center", gap:10, marginBottom:7 }}>
           <span style={{ fontSize:11, fontWeight:700, textTransform:"uppercase", letterSpacing:"0.08em", color:'var(--primary)' }}>Insight principal</span>
           <span style={{ fontSize:11, color:'var(--text-muted)' }}>Generado por IA · basado en 4 fuentes activas</span>
         </div>
-        <p style={{ fontSize:14, color:"#1E293B", lineHeight:1.65, margin:0 }}>{text}</p>
+        <p style={{ fontSize:14, color:"var(--text)", lineHeight:1.65, margin:0 }}>{text}</p>
       </div>
     </div>
   );
@@ -752,16 +812,14 @@ function CoverageBar({ pillars }) {
           );
         })}
       </div>
-      <div style={{ textAlign:"right" }}>
-        <div style={{ fontSize:9, fontWeight:700, textTransform:"uppercase", letterSpacing:"0.06em", color:"var(--text-muted)", marginBottom:5 }}>Referencias de validación</div>
-        <div style={{ display:"flex", gap:14, alignItems:"center" }}>
-          {[["alto","Alta","#16A34A"],["medio","Media","#CA8A04"],["bajo","Baja","#DC2626"]].map(([level, label, color]) => (
-            <div key={level} style={{ display:"flex", alignItems:"center", gap:5 }}>
-              <span style={{ width:7, height:7, borderRadius:"50%", backgroundColor:color, display:"inline-block", flexShrink:0 }} />
-              <span style={{ fontSize:11, color:"var(--text-muted)", fontWeight:500 }}>{label}</span>
-            </div>
-          ))}
-        </div>
+      <div style={{ display:"flex", alignItems:"center", gap:12 }}>
+        <span style={{ fontSize:9, fontWeight:700, textTransform:"uppercase", letterSpacing:"0.06em", color:"var(--text-muted)" }}>Referencias de validación</span>
+        {[["alto","Alta","#16A34A"],["medio","Media","#CA8A04"],["bajo","Baja","#DC2626"]].map(([level, label, color]) => (
+          <div key={level} style={{ display:"flex", alignItems:"center", gap:5 }}>
+            <span style={{ width:7, height:7, borderRadius:"50%", backgroundColor:color, display:"inline-block", flexShrink:0 }} />
+            <span style={{ fontSize:11, color:"var(--text-muted)", fontWeight:500 }}>{label}</span>
+          </div>
+        ))}
       </div>
     </div>
     </div>
@@ -1122,23 +1180,101 @@ function QuerySelector({ activeQueryId, setActiveQueryId, setNav, chatOpen, onTo
   );
 }
 
-// ─── Inicio: Summary view (for non-primary history items) ─────────────────────
+// ─── Proceso UX + Jira cards ─────────────────────────────────────────────────
+const JIRA_STATUS = {
+  "Hecho":     { bg:"#DCFCE7", color:"#166534", label:"Hecho"     },
+  "En curso":  { bg:"#DBEAFE", color:"#1E40AF", label:"En curso"  },
+  "Pendiente": { bg:"#F1F5F9", color:"#64748B", label:"Pendiente" },
+};
+
+function ProcesoUXCard({ data }) {
+  const cols = [
+    { title:"Entregables",              items:data.entregables },
+    { title:"Actividades sugeridas",    items:data.actividades },
+    { title:"Componentes DS relevantes",items:data.componentes },
+  ];
+  return (
+    <div style={{ backgroundColor:"var(--surface)", borderRadius:12, border:"1px solid var(--border)", padding:"18px 20px" }}>
+      <div style={{ display:"flex", alignItems:"center", gap:8, marginBottom:14 }}>
+        <Layers size={16} color="var(--text)" />
+        <span style={{ fontWeight:700, fontSize:14, color:"var(--text)" }}>Proceso UX recomendado</span>
+      </div>
+      <div style={{ display:"inline-flex", alignItems:"center", gap:6, backgroundColor:"#F3EEFF", border:"1px solid #C4A8FF", borderRadius:20, padding:"5px 12px", marginBottom:16 }}>
+        <Star size={11} color="#7C3AED" fill="#7C3AED" />
+        <span style={{ fontSize:12, fontWeight:600, color:"#7C3AED" }}>{data.etapa}</span>
+      </div>
+      <div style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:16 }}>
+        {cols.map(col => (
+          <div key={col.title}>
+            <div style={{ fontSize:10, fontWeight:700, color:"var(--text-muted)", textTransform:"uppercase", letterSpacing:"0.07em", marginBottom:10 }}>
+              {col.title}
+            </div>
+            <div style={{ display:"flex", flexDirection:"column", gap:7 }}>
+              {col.items.map((item, i) => (
+                <div key={i} style={{ display:"flex", alignItems:"flex-start", gap:7 }}>
+                  <span style={{ width:6, height:6, borderRadius:"50%", backgroundColor:"var(--primary)", flexShrink:0, marginTop:5 }} />
+                  <span style={{ fontSize:12, color:"var(--text-sub)", lineHeight:1.45 }}>{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function JiraHistorialCard({ data }) {
+  return (
+    <div style={{ backgroundColor:"var(--surface)", borderRadius:12, border:"1px solid var(--border)", padding:"18px 20px" }}>
+      <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", marginBottom:16 }}>
+        <div style={{ display:"flex", alignItems:"center", gap:8 }}>
+          <div style={{ width:22, height:22, borderRadius:5, backgroundColor:"#0052CC", display:"flex", alignItems:"center", justifyContent:"center" }}>
+            <LayoutGrid size={12} color="#fff" />
+          </div>
+          <span style={{ fontWeight:700, fontSize:14, color:"var(--text)" }}>Jira — Historial</span>
+        </div>
+        <span style={{ fontSize:11, fontWeight:700, color:"var(--primary)", backgroundColor:"var(--primary-light)", border:"1px solid var(--primary)30", borderRadius:20, padding:"3px 10px" }}>
+          {data.count} ticket{data.count !== 1 ? "s" : ""}
+        </span>
+      </div>
+      <div style={{ display:"flex", flexDirection:"column", gap:0 }}>
+        {data.tickets.map((t, i) => {
+          const st = JIRA_STATUS[t.status] || JIRA_STATUS["Pendiente"];
+          return (
+            <div key={i} style={{ display:"flex", alignItems:"center", gap:10, padding:"10px 0", borderBottom: i < data.tickets.length - 1 ? "1px solid var(--border-light)" : "none" }}>
+              <span style={{ fontSize:10, fontWeight:700, color:"#0052CC", backgroundColor:"#E6F0FF", borderRadius:4, padding:"3px 7px", flexShrink:0, letterSpacing:"0.02em" }}>
+                {t.id}
+              </span>
+              <span style={{ flex:1, fontSize:12, color:"var(--text)", lineHeight:1.4 }}>{t.title}</span>
+              <span style={{ fontSize:10, fontWeight:700, color:st.color, backgroundColor:st.bg, borderRadius:20, padding:"3px 9px", flexShrink:0 }}>
+                {st.label}
+              </span>
+              <span style={{ fontSize:11, color:"var(--text-muted)", flexShrink:0, minWidth:52, textAlign:"right" }}>{t.date}</span>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+// ─── Inicio: Summary view ─────────────────────────────────────────────────────
 function SummaryBriefing({ item, onShowDetail }) {
   const pillars = ["Métricas","Usuarios","Hipótesis","Investigaciones","Impacto"];
   return (
     <div>
-      {/* Insight */}
       <div style={{
-        backgroundColor:'var(--surface)', borderRadius:12,
-        border:`1px solid var(--border)`,
+        backgroundColor:"var(--insight-bg)", borderRadius:12,
+        border:`1px solid var(--insight-border)`,
         padding:"18px 22px", marginBottom:20,
         display:"flex", gap:14, alignItems:"flex-start"
       }}>
         <div style={{
-          width:34, height:34, borderRadius:8, backgroundColor:'var(--primary-light)',
+          width:34, height:34, borderRadius:8, backgroundColor:'#0076C7',
           display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0
         }}>
-          <Zap size={15} color="var(--primary)" />
+          <Zap size={15} color="#fff" />
         </div>
         <div>
           <div style={{ display:"flex", alignItems:"center", gap:10, marginBottom:7 }}>
@@ -1155,7 +1291,6 @@ function SummaryBriefing({ item, onShowDetail }) {
         </div>
       </div>
 
-      {/* Coverage */}
       <div style={{
         backgroundColor:'var(--surface)', borderRadius:12,
         border:`1px solid var(--border)`, padding:"20px 24px", marginBottom:20
@@ -1183,7 +1318,6 @@ function SummaryBriefing({ item, onShowDetail }) {
         </div>
       </div>
 
-      {/* CTA row */}
       <div style={{
         backgroundColor:'var(--row-bg)', borderRadius:12,
         border:`1px solid var(--border)`,
@@ -1194,17 +1328,14 @@ function SummaryBriefing({ item, onShowDetail }) {
             Vista resumida del briefing
           </div>
           <div style={{ fontSize:12, color:'var(--text-muted)' }}>
-            El detalle completo de los 5 pilares está disponible en el historial
+            El detalle completo de los 5 pilares está disponible abajo
           </div>
         </div>
-        <button
-          onClick={onShowDetail}
-          style={{
-            padding:"8px 18px", borderRadius:8, cursor:"pointer", flexShrink:0,
-            fontSize:12, fontWeight:600, color:"var(--primary)",
-            backgroundColor:"transparent", border:"1.5px solid var(--primary)"
-          }}
-        >
+        <button onClick={onShowDetail} style={{
+          padding:"8px 18px", borderRadius:8, cursor:"pointer", flexShrink:0,
+          fontSize:12, fontWeight:600, color:"var(--primary)",
+          backgroundColor:"transparent", border:"1.5px solid var(--primary)"
+        }}>
           Ver detalle →
         </button>
       </div>
@@ -1214,15 +1345,12 @@ function SummaryBriefing({ item, onShowDetail }) {
 
 // ─── Inicio: Full briefing ────────────────────────────────────────────────────
 function InicioBriefing({ activeQueryId, setActiveQueryId, setNav, historyItems }) {
-  const [chatOpen,    setChatOpen]    = useState(false);
-  const [showDetail,  setShowDetail]  = useState(false);
+  const [chatOpen,   setChatOpen]   = useState(false);
+  const [showDetail, setShowDetail] = useState(true);
   const items = historyItems || HISTORY;
   const activeItem = items.find(h => h.id === activeQueryId) || items[0];
-  const isDemo = activeQueryId === 0;
 
-  useEffect(() => { setChatOpen(false); setShowDetail(false); }, [activeQueryId]);
-
-  const showCards = isDemo || showDetail;
+  useEffect(() => { setChatOpen(false); setShowDetail(true); }, [activeQueryId]);
 
   return (
     <div style={{ display:"flex", flex:1, overflow:"hidden", minHeight:0 }}>
@@ -1236,19 +1364,17 @@ function InicioBriefing({ activeQueryId, setActiveQueryId, setNav, historyItems 
           historyItems={historyItems}
         />
         <CoverageBar pillars={activeItem.pillars} />
-        {showCards ? (
+        {showDetail ? (
           <>
-            {!isDemo && (
-              <div style={{ display:"flex", justifyContent:"flex-end", marginBottom:12 }}>
-                <button onClick={() => setShowDetail(false)} style={{
-                  padding:"6px 14px", borderRadius:8, cursor:"pointer",
-                  fontSize:12, fontWeight:500, color:"var(--primary)",
-                  backgroundColor:"transparent", border:"1px solid var(--primary)"
-                }}>
-                  ← Ver resumen
-                </button>
-              </div>
-            )}
+            <div style={{ display:"flex", justifyContent:"flex-end", marginBottom:12 }}>
+              <button onClick={() => setShowDetail(false)} style={{
+                padding:"6px 14px", borderRadius:8, cursor:"pointer",
+                fontSize:12, fontWeight:500, color:"var(--primary)",
+                backgroundColor:"transparent", border:"1px solid var(--primary)"
+              }}>
+                ← Ver resumen
+              </button>
+            </div>
             <InsightCard text={activeItem.insight} />
             <div className="di-pillar-grid">
               <PillarCard pillar={activeItem.pillars[0]} />
@@ -1257,6 +1383,12 @@ function InicioBriefing({ activeQueryId, setActiveQueryId, setNav, historyItems 
               <PillarCard pillar={activeItem.pillars[3]} />
               <PillarCard pillar={activeItem.pillars[4]} fullWidth />
             </div>
+            {activeItem.proceso && activeItem.jira && (
+              <div className="di-extras-grid" style={{ display:"grid", gridTemplateColumns:"1.8fr 1fr", gap:16, marginTop:16 }}>
+                <ProcesoUXCard data={activeItem.proceso} />
+                <JiraHistorialCard data={activeItem.jira} />
+              </div>
+            )}
           </>
         ) : (
           <SummaryBriefing item={activeItem} onShowDetail={() => setShowDetail(true)} />
@@ -1317,20 +1449,30 @@ function GeneratingState({ step }) {
 
 function buildGenericPillars() {
   return [
-    { id:"metricas", icon:BarChart2, title:"Métricas actuales", short:"Métricas", confidence:"bajo", source:"Looker", date:"jun 2026", type:"metrics", rows:[
-      { label:"Datos disponibles", value:"En proceso", note:"Aún no hay métricas históricas asociadas a esta iniciativa" },
+    { id:"metricas", icon:BarChart2, title:"Métricas actuales", short:"Métricas", confidence:"medio", source:"Looker", date:"jun 2026", type:"metrics", rows:[
+      { label:"Tasa de conversión actual", value:"58%", dir:"down", note:"−3% vs trimestre anterior" },
+      { label:"Tiempo promedio en flujo", value:"4m 20s", dir:"up", note:"+40s vs benchmark" },
+      { label:"Tasa de abandono", value:"31%", dir:"up", note:"Histórico en flujos similares" },
     ]},
-    { id:"usuarios", icon:Users, title:"Usuarios afectados", short:"Usuarios", confidence:"bajo", source:"Analytics", date:"jun 2026", type:"users", rows:[
-      { label:"Segmento", value:"Por definir", note:"Se completará cuando se identifiquen los usuarios impactados" },
+    { id:"usuarios", icon:Users, title:"Usuarios afectados", short:"Usuarios", confidence:"alto", source:"Analytics", date:"jun 2026", type:"users", rows:[
+      { label:"USUARIOS IMPACTADOS (MES)", value:"~14.200", note:"Estimación basada en tráfico activo" },
+      { label:"SEGMENTO PRINCIPAL", value:"25–40 años", note:"71% del universo direccionable" },
+      { label:"CANAL PREDOMINANTE", value:"App Mobile", note:"63% de las sesiones relevantes" },
     ]},
-    { id:"hipotesis", icon:Lightbulb, title:"Hipótesis existentes", short:"Hipótesis", confidence:"bajo", source:"Notion", date:"jun 2026", type:"hypotheses", items:[
-      { text:"Sin hipótesis registradas aún para esta iniciativa", status:"sin validar" },
+    { id:"hipotesis", icon:Lightbulb, title:"Hipótesis existentes", short:"Hipótesis", confidence:"medio", source:"Notion", date:"may 2026", type:"hypotheses", items:[
+      { text:"Reducir la cantidad de pasos del flujo mejoraría la tasa de finalización en al menos un 15%", status:"parcialmente validada" },
+      { text:"Los usuarios abandonan principalmente en el paso de confirmación por falta de información clara", status:"sin validar" },
+      { text:"Un diseño progresivo (mostrar info gradualmente) reduciría la carga cognitiva percibida", status:"sin validar" },
     ]},
-    { id:"investigaciones", icon:BookOpen, title:"Investigaciones relacionadas", short:"Investigaciones", confidence:"bajo", source:"Notion", date:"jun 2026", type:"research", items:[
-      { title:"No se encontraron investigaciones relacionadas", type:"—", date:"—", relevance:"baja" },
+    { id:"investigaciones", icon:BookOpen, title:"Investigaciones relacionadas", short:"Investigaciones", confidence:"alto", source:"Notion", date:"abr 2026", type:"research", items:[
+      { title:"Estudio de usabilidad: flujos de confirmación en apps financieras", type:"Usabilidad", date:"mar 2026", relevance:"alta" },
+      { title:"Benchmarking de experiencia de checkout en e-commerce regional", type:"Benchmark", date:"abr 2026", relevance:"alta" },
+      { title:"Encuesta NPS post-transacción Q1 2026", type:"Encuesta", date:"feb 2026", relevance:"alta" },
     ]},
-    { id:"impacto", icon:TrendingUp, title:"Impacto esperado", short:"Impacto", confidence:"bajo", source:"Estimación interna", date:"jun 2026", type:"impact", items:[
-      { metric:"Por estimar", expected:"—", note:"El impacto se calculará una vez definido el alcance" },
+    { id:"impacto", icon:TrendingUp, title:"Impacto esperado", short:"Impacto", confidence:"medio", source:"Estimación interna", date:"jun 2026", type:"impact", items:[
+      { metric:"Conversión del flujo", expected:"+12–18%", note:"Basado en mejoras similares en Q3 2025" },
+      { metric:"Tiempo promedio en flujo", expected:"−1m 30s", note:"Reducción estimada por simplificación de pasos" },
+      { metric:"NPS post-interacción", expected:"+8 puntos", note:"Proyección según estudios de referencia" },
     ]},
   ];
 }
@@ -1368,7 +1510,7 @@ function NuevaConsulta({ onGenerate }) {
           celula: `Célula ${celula}`,
           date: new Date().toLocaleDateString('es-AR', { day:'numeric', month:'short', year:'numeric' }),
           processingTime: `${Math.floor(Math.random()*5)+7}s`,
-          confidence: ["medio","medio","medio","medio","bajo"],
+          confidence: ["alto","medio","alto","medio","medio"],
           insight: description.trim()
             ? `Briefing generado a partir de la consulta: "${description.trim()}". Por tratarse de una iniciativa nueva, los pilares se completarán a medida que haya más datos disponibles.`
             : "Briefing generado para esta iniciativa.",
@@ -2001,21 +2143,6 @@ function LoginPage({ onLogin }) {
         <div style={{ position:"absolute", bottom:-80, left:-80, width:320, height:320, borderRadius:"50%", backgroundColor:"rgba(255,255,255,0.06)", pointerEvents:"none" }} />
         <div style={{ position:"absolute", top:"40%", left:-60, width:200, height:200, borderRadius:"50%", backgroundColor:"rgba(255,255,255,0.04)", pointerEvents:"none" }} />
 
-        {/* Logo */}
-        <div style={{ display:"flex", alignItems:"center", gap:12, alignSelf:"flex-start", zIndex:1 }}>
-          <div style={{
-            width:36, height:36, borderRadius:10,
-            backgroundColor:"rgba(255,255,255,0.2)",
-            display:"flex", alignItems:"center", justifyContent:"center"
-          }}>
-            <Zap size={17} color="#fff" />
-          </div>
-          <div>
-            <div style={{ fontWeight:800, fontSize:17, color:"#fff", letterSpacing:"-0.03em", lineHeight:1 }}>Personal Beacon</div>
-            <div style={{ fontSize:9, color:"rgba(255,255,255,0.6)", textTransform:"uppercase", letterSpacing:"0.1em", marginTop:2 }}>Decision Intelligence</div>
-          </div>
-        </div>
-
         {/* SVG illustration */}
         <div style={{
           zIndex:1, display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center",
@@ -2042,14 +2169,27 @@ function LoginPage({ onLogin }) {
       }}>
         <div style={{ width:"100%", maxWidth:380 }}>
 
-          {/* Mobile logo */}
-          <div className="di-login-mobile-logo" style={{ alignItems:"center", gap:10, marginBottom:28 }}>
-            <div style={{ width:32, height:32, borderRadius:8, backgroundColor:"#0076C7", display:"flex", alignItems:"center", justifyContent:"center" }}>
-              <Zap size={15} color="#fff" />
-            </div>
+          {/* Logo */}
+          <div style={{ display:"flex", alignItems:"center", gap:10, marginBottom:32 }}>
+            <svg width="34" height="34" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g clipPath="url(#clip_login)">
+                <circle cx="31.8723" cy="31.8723" r="31.8723" fill="#1EB2F5"/>
+                <path d="M21.2923 23.9374L-0.264492 12.1671L-2.38049 31.7401L21.2923 23.9374Z" fill="#94DEFF"/>
+                <path d="M42.1878 23.9373L66.3895 32.7981L65.9928 13.3573L42.1878 23.9373Z" fill="#94DEFF"/>
+                <path d="M31.2485 10.0711C32.5693 9.94452 33.1295 10.43 34.2221 11.0564C35.1775 11.6039 36.129 12.1584 37.0766 12.7195C38.0193 13.2735 39.084 13.8354 39.9682 14.4519C40.5901 14.9156 40.9623 15.3641 41.0522 16.156C41.2307 17.7314 40.255 18.6031 38.7651 18.7732L38.7631 21.6941C39.5301 21.7657 40.2554 22.0565 40.6733 22.7205C41.6356 24.25 40.8737 25.415 39.6547 26.2684C39.6724 26.7729 39.922 27.5171 40.0278 28.0398C40.6359 31.045 40.7517 34.9594 41.394 37.9559L42.519 46.201C42.6843 46.973 42.9052 47.8012 43.0121 48.574C43.769 48.5806 44.4399 48.6434 44.9975 49.2185C45.4425 49.6807 45.7847 50.2427 45.7826 50.9051C45.8308 51.8763 44.9168 53.0627 43.9272 53.2068C42.6717 53.3896 41.1246 53.3171 39.8422 53.3172L32.2407 53.3152L23.891 53.3172C23.0949 53.3172 22.2934 53.3284 21.4975 53.3172C20.3757 53.3014 19.3429 53.4405 18.4516 52.6228C17.9898 52.2033 17.7209 51.6119 17.7074 50.9881C17.6835 50.0796 18.2332 49.237 19.0346 48.826C19.5138 48.5804 20.0257 48.5833 20.5483 48.574C20.5834 47.5687 21.0217 46.2786 21.1899 45.2557C21.9164 40.8351 23.0701 30.6154 23.8158 26.201C21.4279 25.0268 22.1907 21.8505 24.7612 21.6844C24.7434 20.7259 24.7416 19.7669 24.7553 18.8084C23.7255 18.6838 22.8271 18.2382 22.5121 17.1707C22.3312 16.5455 22.409 15.8733 22.7289 15.3064C23.4629 13.9765 27.6711 12.1763 29.0483 11.1795C29.4729 10.8721 30.7402 10.2131 31.2485 10.0711ZM31.4701 36.9324C30.5294 37.0718 29.5319 37.8923 29.4487 38.8084C29.2997 40.4492 29.4418 42.3257 29.3901 43.9715L32.1401 43.9744L34.1342 43.9715C34.1315 42.9906 34.1976 39.4817 34.0053 38.7361C33.8848 38.2865 33.6481 37.8765 33.3188 37.5477C32.8207 37.0558 32.1589 36.8645 31.4701 36.9324ZM31.6381 15.0965C31.0982 15.4219 29.9137 16.1819 29.393 16.4275L29.3949 21.7L31.9389 21.7039L34.1332 21.7029C34.123 19.9655 34.1221 18.2275 34.1313 16.49C33.7407 16.2524 31.9445 15.0383 31.6381 15.0965Z" fill="white"/>
+              </g>
+              <defs>
+                <clipPath id="clip_login">
+                  <rect width="63.7445" height="63.7445" rx="31.8723" fill="white"/>
+                </clipPath>
+              </defs>
+            </svg>
             <div>
-              <div style={{ fontWeight:800, fontSize:15, color:"#0F172A", letterSpacing:"-0.02em" }}>Personal Beacon</div>
-              <div style={{ fontSize:9, color:"#94A3B8", textTransform:"uppercase", letterSpacing:"0.08em" }}>Decision Intelligence</div>
+              <div style={{ fontWeight:800, fontSize:17, letterSpacing:"-0.03em", lineHeight:1 }}>
+                <span style={{ color:"#0F172A" }}>Personal </span>
+                <span style={{ color:"#1EB2F5" }}>Beacon</span>
+              </div>
+              <div style={{ fontSize:9, color:"#94A3B8", textTransform:"uppercase", letterSpacing:"0.08em", marginTop:2 }}>Decision Intelligence</div>
             </div>
           </div>
 
@@ -2248,6 +2388,7 @@ export default function App() {
           --conf-medio-bg:#FEFCE8; --conf-medio-text:#854D0E;
           --conf-bajo-bg:#FFF7F7;  --conf-bajo-text:#991B1B;
           --conf-sin-datos-bg:#F1F5F9;
+          --insight-bg:#E8F8FF; --insight-border:#4EC5FF;
         }
         .dark {
           --bg:#111318; --surface:#1A1F2E; --sidebar-bg:#00487A;
@@ -2258,6 +2399,7 @@ export default function App() {
           --conf-medio-bg:#2A1900; --conf-medio-text:#FCD34D;
           --conf-bajo-bg:#2A0808;  --conf-bajo-text:#F87171;
           --conf-sin-datos-bg:#222836;
+          --insight-bg:#0A1F2E; --insight-border:#1A5F8A;
         }
         .dark ::-webkit-scrollbar-thumb { background:#3A4258; }
         .dark ::-webkit-scrollbar-track { background:#111318; }
@@ -2297,7 +2439,7 @@ export default function App() {
         .di-form-pad { max-width:620px; margin:0 auto; padding:40px 30px; }
         .di-config-pad { max-width:580px; margin:0 auto; padding:32px 30px; }
         .di-empty-pad { padding:100px 40px; }
-        .di-pillar-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:16px; }
+        .di-pillar-grid { display:grid; grid-template-columns:repeat(4, 1fr); gap:16px; }
         .di-impact-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
         .di-owner-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
         .di-saved-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
@@ -2319,7 +2461,8 @@ export default function App() {
           .di-form-pad { padding:24px 16px !important; }
           .di-config-pad { padding:20px 16px !important; }
           .di-empty-pad { padding:60px 24px !important; }
-          .di-pillar-grid { gap:12px !important; }
+          .di-pillar-grid { gap:12px !important; grid-template-columns:repeat(2, 1fr) !important; }
+          .di-extras-grid { grid-template-columns:1fr !important; }
           .di-impact-grid { grid-template-columns:1fr !important; }
           .di-owner-grid { grid-template-columns:1fr !important; }
           .di-saved-grid { grid-template-columns:1fr !important; gap:12px !important; }

@@ -486,22 +486,19 @@ function Sidebar({ active, setActive, collapsed, onToggle }) {
         borderBottom:"1px solid rgba(255,255,255,0.12)"
       }}>
         <div style={{ display:"flex", flexDirection:"column", alignItems:"flex-start", gap:6 }}>
-          <div style={{
-            width:30, height:30, borderRadius:8, flexShrink:0,
-            backgroundColor:"rgba(255,255,255,0.2)",
-            display:"flex", alignItems:"center", justifyContent:"center"
-          }}>
-            <svg width="16" height="16" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-              <polygon points="45,82 55,82 53,40 47,40" fill="#fff"/>
-              <rect x="41" y="28" width="18" height="14" rx="2" fill="#fff"/>
-              <polygon points="50,11 38,28 62,28" fill="#fff"/>
-              <circle cx="50" cy="35" r="5" fill="#FBBF24"/>
-              <rect x="33" y="82" width="34" height="7" rx="3" fill="#fff"/>
-              <line x1="60" y1="29" x2="82" y2="13" stroke="#fff" strokeWidth="3" strokeLinecap="round"/>
-              <line x1="61" y1="33" x2="87" y2="33" stroke="#fff" strokeWidth="3" strokeLinecap="round"/>
-              <line x1="60" y1="37" x2="82" y2="53" stroke="#fff" strokeWidth="3" strokeLinecap="round"/>
-            </svg>
-          </div>
+          <svg width="30" height="30" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink:0 }}>
+            <g clipPath="url(#clip_menu)">
+              <circle cx="31.8723" cy="31.8723" r="31.8723" fill="#C8EEFF"/>
+              <path d="M21.2923 23.9374L-0.264492 12.1671L-2.38049 31.7401L21.2923 23.9374Z" fill="#0076C7"/>
+              <path d="M42.1878 23.9373L66.3895 32.7981L65.9928 13.3573L42.1878 23.9373Z" fill="#0076C7"/>
+              <path d="M31.2485 10.0711C32.5693 9.94452 33.1295 10.43 34.2221 11.0564C35.1775 11.6039 36.129 12.1584 37.0766 12.7195C38.0193 13.2735 39.084 13.8354 39.9682 14.4519C40.5901 14.9156 40.9623 15.3641 41.0522 16.156C41.2307 17.7314 40.255 18.6031 38.7651 18.7732L38.7631 21.6941C39.5301 21.7657 40.2554 22.0565 40.6733 22.7205C41.6356 24.25 40.8737 25.415 39.6547 26.2684C39.6724 26.7729 39.922 27.5171 40.0278 28.0398C40.6359 31.045 40.7517 34.9594 41.394 37.9559L42.519 46.201C42.6843 46.973 42.9052 47.8012 43.0121 48.574C43.769 48.5806 44.4399 48.6434 44.9975 49.2185C45.4425 49.6807 45.7847 50.2427 45.7826 50.9051C45.8308 51.8763 44.9168 53.0627 43.9272 53.2068C42.6717 53.3896 41.1246 53.3171 39.8422 53.3172L32.2407 53.3152L23.891 53.3172C23.0949 53.3172 22.2934 53.3284 21.4975 53.3172C20.3757 53.3014 19.3429 53.4405 18.4516 52.6228C17.9898 52.2033 17.7209 51.6119 17.7074 50.9881C17.6835 50.0796 18.2332 49.237 19.0346 48.826C19.5138 48.5804 20.0257 48.5833 20.5483 48.574C20.5834 47.5687 21.0217 46.2786 21.1899 45.2557C21.9164 40.8351 23.0701 30.6154 23.8158 26.201C21.4279 25.0268 22.1907 21.8505 24.7612 21.6844C24.7434 20.7259 24.7416 19.7669 24.7553 18.8084C23.7255 18.6838 22.8271 18.2382 22.5121 17.1707C22.3312 16.5455 22.409 15.8733 22.7289 15.3064C23.4629 13.9765 27.6711 12.1763 29.0483 11.1795C29.4729 10.8721 30.7402 10.2131 31.2485 10.0711ZM31.4701 36.9324C30.5294 37.0718 29.5319 37.8923 29.4487 38.8084C29.2997 40.4492 29.4418 42.3257 29.3901 43.9715L32.1401 43.9744L34.1342 43.9715C34.1315 42.9906 34.1976 39.4817 34.0053 38.7361C33.8848 38.2865 33.6481 37.8765 33.3188 37.5477C32.8207 37.0558 32.1589 36.8645 31.4701 36.9324ZM31.6381 15.0965C31.0982 15.4219 29.9137 16.1819 29.393 16.4275L29.3949 21.7L31.9389 21.7039L34.1332 21.7029C34.123 19.9655 34.1221 18.2275 34.1313 16.49C33.7407 16.2524 31.9445 15.0383 31.6381 15.0965Z" fill="#1EB2F5"/>
+            </g>
+            <defs>
+              <clipPath id="clip_menu">
+                <rect width="63.7445" height="63.7445" rx="31.8723" fill="white"/>
+              </clipPath>
+            </defs>
+          </svg>
           {!collapsed && (
             <div>
               <div style={{ fontWeight:800, fontSize:14, color:"#fff", letterSpacing:"-0.03em", whiteSpace:"nowrap" }}>Personal Beacon</div>
@@ -1515,6 +1512,21 @@ function NuevaConsulta({ onGenerate }) {
             ? `Briefing generado a partir de la consulta: "${description.trim()}". Por tratarse de una iniciativa nueva, los pilares se completarán a medida que haya más datos disponibles.`
             : "Briefing generado para esta iniciativa.",
           pillars: buildGenericPillars(),
+          proceso: {
+            etapa:"Etapa: Por definir — Doble Diamante",
+            entregables:["Mapa del flujo actual","Definición del problema","Brief de la iniciativa","Criterios de éxito"],
+            actividades:["Entrevistas con stakeholders","Análisis de métricas base","Workshop de definición","Revisión de investigaciones previas"],
+            componentes:["Por identificar según alcance","Componentes existentes del DS","Patrones de diseño aplicables","Guidelines de accesibilidad"],
+          },
+          jira:{
+            count:1,
+            tickets:[
+              { id:"PB-0001", title:`Iniciativa: ${initiative.trim()}`, status:"En curso",  date: new Date().toLocaleDateString('es-AR', { day:'numeric', month:'short', year:'numeric' }) },
+              { id:"PB-0002", title:"Definición de alcance y criterios",               status:"Pendiente", date:"—" },
+              { id:"PB-0003", title:"Research y relevamiento de datos",                status:"Pendiente", date:"—" },
+              { id:"PB-0004", title:"Propuesta de solución y prototipo",               status:"Pendiente", date:"—" },
+            ],
+          },
         };
     let current = 0;
     const iv = setInterval(() => {
